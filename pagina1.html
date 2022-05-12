@@ -12,7 +12,12 @@
 </head>
 
 <body>
-    <h1>Pergunta aleatoria</h1>
+    <div class="col-8 offset-2 text-center mt-5">
+        <h1 style="color: white;">Pergunta aleatoria</h1>
+    </div>
+    <div id="dica" class="col-2 offset-5 mt-5">
+        <p style="color: white;">[- Dica -]</p>
+    </div>
     <div id="divResposta">
         <div style="width: 100%;">
             <label for="resposta" id="labelResposta">Escreva sua resposta aqui</label>
@@ -31,7 +36,24 @@
 </html>
 
 <script>
-    function enviarResposta(){
-        
+    function enviarResposta() {
+        var resposta = document.getElementById('resposta').value
+
+        if (resposta == '??') {
+
+            var url = window.location.href;
+
+            var proximaUrl = url.split('/');
+
+            proximaUrl.pop();
+
+            proximaUrl = proximaUrl.join('/');
+
+            window.location.href = proximaUrl + '/pagina2.html';
+
+        } else {
+            alert(`A resposta ${resposta} está errada!`)
+        }
+
     }
 </script>
