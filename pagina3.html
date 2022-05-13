@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+
+            #dica{
+                color: gray;
+                position: absolute;
+                bottom: 50%;
+            }
+
+        </style>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="divPergunta">
+        <div id="pergunta" class="col-8 offset-2 text-center mt-5">
+            <h1 style="color: white;">Pergunta</h1>
+        </div>
+        <div id="dica" class="col-2 offset-5 mt-5">
+            <p>[- Dica -]</p>
+        </div>
+    </div>
+    <div id="divResposta">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <input type="text" name="resposta" id="resposta" maxlength="100"
+                    placeholder="Escreva sua resposta aqui">
+            </div>
+            <div class="col-1" style="padding-left: 0;">
+                <button id="botaoResposta" onclick="enviarResposta()"><span style="width: 100%;">></span></button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function enviarResposta() {
+        var resposta = document.getElementById("resposta").value;
+        if (resposta == '???') {
+            var url = window.location.href;
+
+            var proximaUrl = url.split('/');
+
+            proximaUrl.pop();
+
+            proximaUrl = proximaUrl.join('/');
+
+            console.log("proximaUrl", proximaUrl)
+
+            window.location.href = proximaUrl + '/pagina4.html';
+        } else {
+            alert("A resposta " + resposta + " está errada!");
+        }
+    }
+</script>
