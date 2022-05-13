@@ -8,16 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-
-            #dica{
-                color: gray;
-                position: absolute;
-                bottom: 50%;
-            }
-
-        </style>
-    <title>Document</title>
+    <style>
+        #dica {
+            color: gray;
+            position: absolute;
+            bottom: 50%;
+        }
+    </style>
+    <title>Descubra_me</title>
 </head>
 
 <body>
@@ -47,8 +45,22 @@
 </html>
 
 <script>
+    var resposta = document.getElementById('resposta')
+ 
+
+    const ENTER = 13;
+
+    resposta.addEventListener('keypress', function (evento) {
+
+        if (evento.keyCode == ENTER) {
+            // EVENTO ALEATORIO
+        }
+
+    })
+        
+    var resposta = document.getElementById("resposta").value;
+
     function enviarResposta() {
-        var resposta = document.getElementById("resposta").value;
         if (resposta == '???') {
             var url = window.location.href;
 
@@ -60,9 +72,13 @@
 
             console.log("proximaUrl", proximaUrl)
 
-            window.location.href = proximaUrl + '/pagina4.html';
+            window.location.href = proximaUrl + '/pagina2.html';
         } else {
+            if (resposta.length == 0) {
+                alert('[ERROR] Preencha o espaço!')
+            }
             alert("A resposta " + resposta + " está errada!");
         }
     }
+
 </script>
