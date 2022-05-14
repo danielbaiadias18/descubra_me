@@ -22,12 +22,13 @@
         </div>
     </div>
     <div id="divResposta">
-        <div style="width: 100%;">
+        <!-- <div style="width: 100%;">
             <label for="resposta" id="labelResposta">Escreva sua resposta aqui</label>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-6 offset-3">
-                <input type="text" name="resposta" id="resposta" maxlength="100" placeholder="Escreva sua resposta aqui">
+                <input type="text" name="resposta" id="resposta" maxlength="100"
+                    placeholder="Escreva sua resposta aqui">
             </div>
             <div class="col-1" style="padding-left: 0;">
                 <button id="botaoResposta" onclick="enviarResposta()"><span style="width: 100%;">></span></button>
@@ -39,6 +40,7 @@
 </html>
 
 <script>
+   
     function enviarResposta() {
         var resposta = document.getElementById("resposta").value;
         if (resposta == 'pato') {
@@ -49,7 +51,7 @@
             proximaUrl.pop();
 
             proximaUrl = proximaUrl.join('/');
-            
+
             console.log("proximaUrl", proximaUrl)
 
             window.location.href = proximaUrl + '/pagina1.html';
