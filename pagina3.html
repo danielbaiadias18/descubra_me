@@ -14,18 +14,98 @@
             position: absolute;
             bottom: 50%;
         }
+
+        #botaoAmarelo, #botaoVermelho, #botaoAzul, #botaoVerde {
+            width: 100px;
+            height: 100px;
+            float: left;
+            margin: 15px;
+        }
+
+        #botaoAmarelo {
+            background-color: rgb(247, 255, 99);
+            border: 3px solid rgb(197, 194, 1);
+        }
+
+        #botaoVermelho {
+            background-color: rgb(255, 99, 99);
+            border:3px solid rgb(219, 2, 2);
+        }
+
+        #botaoAzul {
+            background-color: rgb(99, 104, 255);
+            border: 3px solid rgb(2, 35, 219);
+        }
+
+        #botaoVerde {
+            background-color: rgb(109, 255, 99);
+            border: 3px solid rgb(13, 219, 2);
+        }
+
+                /* ================================ */
+                /*        SEPARAÇÃO (HOVER)         */
+                /* ================================ */
+
+        #botaoAmarelo:hover {
+            background-color: rgb(218, 225, 83);
+        }
+
+        #botaoVermelho:hover {
+            background-color: rgb(212, 78, 78);
+        }
+
+        #botaoAzul:hover {
+            background-color: rgb(72, 76, 201);
+        }
+
+        #botaoVerde:hover {
+            background-color: rgb(73, 188, 65);
+        }
+
+                /* ================================ */
+                /*         SEPARAÇÃO (COR)          */
+                /* ================================ */
+
+        #amarelo {
+            color: yellow;
+        }
+
+        #vermelho {
+            color: red;
+        }
+
+        #azul {
+            color: blue;
+        }
+
+        #verde {
+            color: green;
+        }
+
     </style>
     <title>Descubra_me</title>
 </head>
 
 <body>
-
     <div id="divPergunta">
         <div id="pergunta" class="col-8 offset-2 text-center mt-5">
-            <h1 style="color: white;">Pergunta</h1>
-        </div>
-        <div id="dica" class="col-2 offset-5 mt-5">
-            <p>[- Dica -]</p>
+            <h2 style="color: white;">Siga a sequencia: 
+                <div class="col-12 offset-0">
+                    <strong>
+                        <span id="verde">vermelho</span>, 
+                        <span id="amarelo">azul</span>, 
+                        <span id="vermelho">verde</span>, 
+                        <span id="azul">amarelo</span>.
+                    </strong>
+                </div></h2>
+        </div >
+        <div class="container">
+            <div id="dica" class="col-12 offset-1 offset-sm-0 offset-md-2 offset-xl-2">
+                <button id="botaoAmarelo" onclick="----- ??? -----"></button>
+                <button id="botaoVermelho" onclick="----- ??? -----"></button>
+                <button id="botaoAzul" onclick="----- ??? -----"></button>
+                <button id="botaoVerde" onclick="----- ??? -----"></button>
+            </div>
         </div>
     </div>
     <div id="divResposta">
@@ -45,22 +125,11 @@
 </html>
 
 <script>
-    var resposta = document.getElementById('resposta')
- 
-
-    const ENTER = 13;
-
-    resposta.addEventListener('keypress', function (evento) {
-
-        if (evento.keyCode == ENTER) {
-            // EVENTO ALEATORIO
-        }
-
-    })
-        
-    var resposta = document.getElementById("resposta").value;
 
     function enviarResposta() {
+
+        var resposta = document.getElementById("resposta").value;
+
         if (resposta == '???') {
             var url = window.location.href;
 
@@ -72,12 +141,14 @@
 
             console.log("proximaUrl", proximaUrl)
 
-            window.location.href = proximaUrl + '/pagina2.html';
+            window.location.href = proximaUrl + '/pagina4.html';
         } else {
+
             if (resposta.length == 0) {
                 alert('[ERROR] Preencha o espaço!')
+            } else {
+                alert("A resposta " + resposta + " está errada!");
             }
-            alert("A resposta " + resposta + " está errada!");
         }
     }
 
