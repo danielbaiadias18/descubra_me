@@ -13,73 +13,7 @@
             color: gray;
             position: absolute;
             bottom: 50%;
-        }
-
-        #botaoAmarelo, #botaoVermelho, #botaoAzul, #botaoVerde {
-            width: 100px;
-            height: 100px;
-            float: left;
-            margin: 15px;
-        }
-
-        #botaoAmarelo {
-            background-color: rgb(247, 255, 99);
-            border: 3px solid rgb(197, 194, 1);
-        }
-
-        #botaoVermelho {
-            background-color: rgb(255, 99, 99);
-            border:3px solid rgb(219, 2, 2);
-        }
-
-        #botaoAzul {
-            background-color: rgb(99, 104, 255);
-            border: 3px solid rgb(2, 35, 219);
-        }
-
-        #botaoVerde {
-            background-color: rgb(109, 255, 99);
-            border: 3px solid rgb(13, 219, 2);
-        }
-
-                /* ================================ */
-                /*        SEPARAÇÃO (HOVER)         */
-                /* ================================ */
-
-        #botaoAmarelo:hover {
-            background-color: rgb(218, 225, 83);
-        }
-
-        #botaoVermelho:hover {
-            background-color: rgb(212, 78, 78);
-        }
-
-        #botaoAzul:hover {
-            background-color: rgb(72, 76, 201);
-        }
-
-        #botaoVerde:hover {
-            background-color: rgb(73, 188, 65);
-        }
-
-                /* ================================ */
-                /*         SEPARAÇÃO (COR)          */
-                /* ================================ */
-
-        #amarelo {
-            color: yellow;
-        }
-
-        #vermelho {
-            color: red;
-        }
-
-        #azul {
-            color: blue;
-        }
-
-        #verde {
-            color: green;
+            text-align: center;
         }
 
     </style>
@@ -87,24 +21,16 @@
 </head>
 
 <body>
+    
     <div id="divPergunta">
         <div id="pergunta" class="col-8 offset-2 text-center mt-5">
-            <h2 style="color: white;">Siga a sequencia: 
-                <div class="col-12 offset-0">
-                    <strong>
-                        <span id="verde">vermelho</span>, 
-                        <span id="amarelo">azul</span>, 
-                        <span id="vermelho">verde</span>, 
-                        <span id="azul">amarelo</span>.
-                    </strong>
-                </div></h2>
+            <h2 style="color: white;">
+                Pergunta Aleatoria
+            </h2>
         </div >
         <div class="container">
-            <div id="dica" class="col-12 offset-1 offset-sm-0 offset-md-2 offset-xl-2">
-                <button id="botaoAmarelo" onclick="----- ??? -----"></button>
-                <button id="botaoVermelho" onclick="----- ??? -----"></button>
-                <button id="botaoAzul" onclick="----- ??? -----"></button>
-                <button id="botaoVerde" onclick="----- ??? -----"></button>
+            <div id="dica" class="col-12">
+                [- Dica -]
             </div>
         </div>
     </div>
