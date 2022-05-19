@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <style>
-        
         #pergunta {
             text-align: center;
             color: white;
@@ -17,17 +17,15 @@
 
         #dica {
             position: absolute;
-            bottom: 50%;
+            bottom: 40%;
+            left: -10%;
             color: rgb(100, 100, 100);
             text-align: center;
         }
 
         #fotoDica {
-            position: absolute;
-            bottom: 55%;
-            left: 35%;
-            height: 187px;
-            width: 200px;
+            height: 257px;
+            width: 270px;
         }
     </style>
     <title>Descubra-me</title>
@@ -38,7 +36,7 @@
         <h2>Quantos "degraus" existem?</h2>
     </div>
 
-    <div id="dica" class="col-12">
+    <div id="dica" class="col-12 offset-sm-1 offset-md-1">
         <img id="fotoDica" src="image-escada_P1.png" alt="">
 
     </div>
@@ -83,8 +81,24 @@
             window.location.href = proximaUrl + '/pagina2.html';
 
         } else {
-            alert(`A resposta ${resposta} está errada!`)
+            if (resposta.length == 0) {
+                alert('[ERROR] Preencha o espaço!')
+            } else {
+                alert("A resposta " + resposta + " está errada!");
+            }
         }
-
     }
+
+    document.addEventListener('keypress', function (evento) {
+
+        if (evento.key === "Enter") {
+
+            const botaoEnter = document.querySelector('#botaoResposta');
+
+            botaoEnter.click();
+
+            function enviarResposta() { }
+
+        }
+    })
 </script>
