@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<<<<<<< HEAD
-        <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Descubra_me</title>
     <style>
         #dica {
             color: gray;
@@ -19,27 +20,12 @@
             text-align: center;
         }
     </style>
-    <title>Descubra_me</title>
-=======
-        <style>
-
-            #dica{
-                color: gray;
-                position: absolute;
-                bottom: 50%;
-            }
-
-        </style>
-    <title>ide</title>
->>>>>>> 792508b1bef4149978e0a6904323593cb06a4038
-</head>
 
 <body>
-
     <div id="divPergunta">
         <div id="pergunta" class="col-8 offset-2 text-center mt-5">
             <h2 style="color: white;">
-                Pergunta Aleatoria
+                Siga a sequencia: verde, azul, vermelho, amarelo
             </h2>
         </div>
         <div class="container">
@@ -65,6 +51,18 @@
 </html>
 
 <script>
+    debugger
+
+    function alertFail() {
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Opa...',
+            text: `A resposta ${resposta} está errada!`,
+            showdenybutton: true
+        })
+
+    }
 
     function enviarResposta() {
 
@@ -80,14 +78,19 @@
 
             proximaUrl = proximaUrl.join('/');
 
-            window.location.href = proximaUrl + '/pagina2.html';
+            window.location.href = proximaUrl + '/pagina4.html';
 
         } else {
 
             if (resposta.length == 0) {
                 alert('[ERROR] Preencha o espaço!')
             } else {
-                alert("A resposta " + resposta + " está errada!");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Opa...',
+                    text: `A resposta ${resposta} está errada!`,
+                    buttons: { ok }
+                })
             }
         }
     }
