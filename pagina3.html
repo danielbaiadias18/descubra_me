@@ -51,18 +51,6 @@
 </html>
 
 <script>
-    debugger
-
-    function alertFail() {
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Opa...',
-            text: `A resposta ${resposta} está errada!`,
-            showdenybutton: true
-        })
-
-    }
 
     function enviarResposta() {
 
@@ -83,13 +71,23 @@
         } else {
 
             if (resposta.length == 0) {
-                alert('[ERROR] Preencha o espaço!')
+                Swal.fire({
+                    icon: 'warning',
+                    title:'[ERROR]',
+                    text:'Preencha o espaço!',
+                    background: '#383838',
+                    color: '#E2E2E2',
+                    confirmButtonColor: '#313131',
+                })
             } else {
+
                 Swal.fire({
                     icon: 'error',
-                    title: 'Opa...',
-                    text: `A resposta ${resposta} está errada!`,
-                    buttons: { ok }
+                    title: '[ERROR]',
+                    text: `A resposta "${resposta}" está errada!`,
+                    background: '#383838',
+                    color: '#E2E2E2',
+                    confirmButtonColor: '#313131',
                 })
             }
         }
