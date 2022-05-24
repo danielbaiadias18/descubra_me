@@ -17,6 +17,13 @@
             left: 12%;
             text-align: center;
         }
+
+        footer{
+            color: rgb(45, 45, 45);
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
     </style>
     <title>Descubra-me</title>
 </head>
@@ -46,16 +53,23 @@
             </div>
         </div>
     </div>
+    <footer>
+        4
+    </footer>
 
 </body>
 
 </html>
 
 <script>
+    document.getElementById('resposta').focus();
 
     function enviarResposta() {
+
         var resposta = document.getElementById("resposta").value;
-        if (resposta == 'pato' || resposta == 'Pato') {
+
+        if (resposta == '???' || resposta == 'Pato') {
+
             var url = window.location.href;
 
             var proximaUrl = url.split('/');
@@ -66,7 +80,7 @@
 
             console.log("proximaUrl", proximaUrl)
 
-            window.location.href = proximaUrl + '/pagina1.html';
+            window.location.href = proximaUrl + '/pagina5.html';
         } else {
             if (resposta.length == 0) {
                 Swal.fire({

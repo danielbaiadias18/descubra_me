@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <style>
         #pergunta {
             text-align: center;
@@ -26,6 +26,13 @@
         #fotoDica {
             height: 257px;
             width: 270px;
+        }
+
+        footer{
+            color: rgb(45, 45, 45);
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
         }
     </style>
     <title>Descubra-me</title>
@@ -60,12 +67,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+    <footer>
+        1
+    </footer>
 </body>
 
 </html>
 
 <script>
+    document.getElementById('resposta').focus();
+
     function enviarResposta() {
+
         var resposta = document.getElementById('resposta').value
 
         if (resposta == '1') {
