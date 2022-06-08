@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Descubra_me</title>
@@ -59,7 +60,7 @@
 </html>
 
 <script>
-    debugger
+    
     document.getElementById('resposta').focus();
 
     function enviarResposta() {
@@ -67,45 +68,47 @@
         var resposta = document.getElementById("resposta").value;
 
         const Alerts = {
-            Warning:
-                function Warning() {
-                    Swal.fire({
-                        toast: true,
-                        icon: 'warning',
-                        text: 'Preencha o espaço!',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        background: '#383838',
-                        color: '#E2E2E2',
-                        confirmButtonColor: '#313131',
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
-                },
 
-            Fail:
-                function Fail() {
-                    Swal.fire({
-                        toast: true,
-                        icon: 'error',
-                        text: `A resposta "${resposta}" está errada!`,
-                        timer: 2000,
-                        timerProgressBar: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        background: '#383838',
-                        color: '#E2E2E2',
-                        confirmButtonColor: '#313131',
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
-                },
+            Warning() {
+                Swal.fire({
+                    allowEnterKey: false,
+                    toast: true,
+                    icon: 'warning',
+                    text: 'Preencha o espaço!',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    color: '#E2E2E2',
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    background: '#383838',
+                    confirmButtonColor: '#313131',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+            },
+
+            Fail() {
+                Swal.fire({
+                    allowEnterKey: false,
+                    toast: true,
+                    icon: 'error',
+                    text: `A resposta "${resposta}" está errada!`,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    background: '#383838',
+                    color: '#E2E2E2',
+                    confirmButtonColor: '#313131',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+            },
         }
-
 
         if (resposta == '???') {
 
@@ -128,7 +131,6 @@
         }
     }
 
-
     document.addEventListener('keypress', function (evento) {
 
         if (evento.key === "Enter") {
@@ -141,6 +143,5 @@
 
         }
     })
-
 
 </script>
