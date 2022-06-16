@@ -26,14 +26,18 @@
         <div id="dica" class="col">
             <div id="fundo">
                 <div id="contas">
-                    | CONTAS |
-                    <button id="submit" onclick="submit()">submit</button>
+                    <span id="conta">
+                        ...
+                        <button onclick="randomNumber10()"></button>
+                    </span>
+                    <div id="botaoContas">
+                        <button id="submit" onclick="submit()">submit</button>
+                    </div>
                 </div>
                 <div id="cronometro">
 
                     <div id="contador">
                         <h1 id="cron">00:00:000</h1>
-                        LEMBRETE: FAZER O BOTAO START DESAPARECER QUANDO APERTA-LO/ O MESMO PARA O STOP!!!
                     </div>
 
                     <div id="botoes">
@@ -81,6 +85,12 @@
     document.getElementById('resposta').focus();
     var resposta = document.getElementById("resposta").value;
 
+    var conta = document.getElementById('conta').innerText = 'CARA.. FAZ GERAR UNS NUMEROS ALEATORIOS AI PRA FAZER UMA LISTA DE CONTAS E SO ISSO ;-;'
+
+    function randomNumber10() {
+        math.floor(10*math.random()+1)
+    }
+
     var seconds = 0;
     var minutes = 0;
     var milliseconds = 0;
@@ -103,17 +113,26 @@
 
     function start() {
         timer()
-        stop()
+        clearInterval(interval)
         interval = setInterval(timer, 10)
 
-        document.getElementById('botaoStart').innerHTML = ''
+        document.getElementById('botaoStart').style.display = 'none'
+        document.getElementById('botaoStop').style.display = 'block'
     }
 
     function stop() {
         clearInterval(interval)
+        document.getElementById('botaoStart').style.display = 'block'
+        document.getElementById('botaoStop').style.display = 'none'
     }
 
     function reset() {
+
+        document.getElementById('botaoStart').style.display = 'block'
+        document.getElementById('botaoStop').style.display = 'none'
+
+        clearInterval(interval)
+
         seconds = 0
         minutes = 0
         milliseconds = 0
@@ -122,7 +141,7 @@
     }
 
     function timer() {
-        if ((milliseconds += 100) == 1000) {
+        if ((milliseconds += 10) == 1000) {
             milliseconds = 0;
             seconds++;
         }
@@ -131,9 +150,9 @@
             minutes++;
         }
 
-        if (minutes == 010/*numeroEscolhido*/ && seconds == 00 && milliseconds == 000) {
-            alert('o tempo acabou!')
+        if (minutes == 02 && seconds == 00 && milliseconds == 000) {
             stop()
+            swal.fire({})
         }
         document.getElementById('cron').innerText = `${extraZero(minutes)}:${extraZero(seconds)}:${extraZero2(milliseconds)}`
     }
