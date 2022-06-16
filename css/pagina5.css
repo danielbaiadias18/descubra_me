@@ -32,10 +32,10 @@ footer {
     border-top-left-radius: .2em;
     border-bottom-left-radius: .2em;
     color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
 
+#botaoContas {
+    
 }
 
 /* START-CRONOMETRO */
@@ -54,34 +54,39 @@ footer {
     text-align: center;
     font-family: Helvetica Neue;
     padding-top: 45px;
+}
+
+#botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#botaoStart, #botaoStop, #botaoReset {
+    width: 70px;
+    height: 30px;
+    border: none;
+    color: white;
 
 }
 
 #botaoStart {
-    width: 60px;
-    padding: 3px;
+    
     background-color: green;
-    border: none;
-    border-radius: 5px;
-    color: white;
+    display: block;
+    margin-right: 5px;
 }
 
 #botaoStop {
-    width: 60px;
-    padding: 3px;
     background-color: gray;
-    border: none;
-    border-radius: 5px;
-    color: white;
+    display: none;
+    margin-right: 5px;
+
 }
 
 #botaoReset {
-    width: 60px;
-    padding: 3px;
     background-color: red;
-    border: none;
-    border-radius: 5px;
-    color: white;
+    margin-left: 5px;
 }
 
 /* END-CRONOMETRO */
@@ -115,7 +120,9 @@ footer {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     stroke-width: 2;
     stroke: #fff;
     stroke-miterlimit: 10;
@@ -164,8 +171,8 @@ footer {
     overflow: hidden;
     display: flex;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 10%;
+    justify-content: center;
+    margin-left: 30px;
     color: white;
     font-family: 'Sriracha';
     color: #7ac142;
