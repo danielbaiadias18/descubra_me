@@ -25,23 +25,40 @@ footer {
 }
 
 #contas {
-    background-color: yellow;
     width: 320px;
     height: 330px;
     float: left;
     border-top-left-radius: .2em;
     border-bottom-left-radius: .2em;
     color: black;
+    text-align: left;
+    margin-top: 3px;
 }
 
-#botaoContas {
-    
+#i1, #i2, #i3, #i4, #i5, #i6 {
+    font-size: 20px;
+    font-family: 'Courier New', Courier;
+    padding: 0px 10px;
+    color: rgb(50, 50, 50);
+    margin-left: 25px;
+    display: inline;
+}
+
+.input {
+    width: 50px;
+    display: inline;
+}
+
+#submit {
+    background-color: #3CAAE7;
+    border: none;
+    color: white;
+    width: auto;
 }
 
 /* START-CRONOMETRO */
 
 #cronometro {
-    background-color: rgba(254, 163, 163, 0.904);
     width: 260px;
     height: 220px;
     float: right;

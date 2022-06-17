@@ -14,25 +14,30 @@
     <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/pagina5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Descubra_me</title>
 
 <body>
     <div id="divPergunta">
-        <div id="pergunta" class="col-8 offset-2 text-center mt-5">
-            <h2 style="color: white;">
-                Pergunta Aleatoria
-            </h2>
-        </div>
         <div id="dica" class="col">
             <div id="fundo">
                 <div id="contas">
-                    <span id="conta">
-                        ...
-                        <button onclick="randomNumber10()"></button>
-                    </span>
-                    <div id="botaoContas">
-                        <button id="submit" onclick="submit()">submit</button>
-                    </div>
+
+                    <div><p id="i1"></p><input class="input" type="text"></div>
+                    <div><p id="i2"></p><input class="input" type="text"></div>
+                    <div><p id="i3"></p><input class="input" type="text"></div>
+                    <div><p id="i4"></p><input class="input" type="text"></div>
+                    <div><p id="i5"></p><input class="input" type="text"></div>
+                    <div><p id="i6"></p><input class="input" type="text"></div>
+                    </ul>
+                    LEMBRETES:
+                    <p style="color: white;">1-FAZER UMA COLUNA DE INPUTS RETOS</p>
+                    <p style="color: white;">2-CONSERTAR A CONFIRMACAO</p>
+                    <p style="color: white;">3-SISTEMA DE RESPOSTAS</p>
+                    <p style="color: white;">4-STYLE TOTAL</p>
+
+                    <button id="submit" onclick="submit()">submit</button>
+
                 </div>
                 <div id="cronometro">
 
@@ -85,11 +90,12 @@
     document.getElementById('resposta').focus();
     var resposta = document.getElementById("resposta").value;
 
-    var conta = document.getElementById('conta').innerText = 'CARA.. FAZ GERAR UNS NUMEROS ALEATORIOS AI PRA FAZER UMA LISTA DE CONTAS E SO ISSO ;-;'
-
-    function randomNumber10() {
-        math.floor(10*math.random()+1)
+    for (var num = 1; num <= 6; num++) {
+        var valor1 = Math.floor((Math.random() * 9) + 1)
+        var valor2 = Math.floor((Math.random() * 9) + 1)
+        var li = document.getElementById(`i${num}`).innerText = `${valor1} x ${valor2} = ${valor1 * valor2}`
     }
+
 
     var seconds = 0;
     var minutes = 0;
@@ -150,9 +156,27 @@
             minutes++;
         }
 
-        if (minutes == 02 && seconds == 00 && milliseconds == 000) {
-            stop()
-            swal.fire({})
+        if (minutes == 04 && seconds == 00 && milliseconds == 000) {
+            reset()
+
+            Swal.fire({
+                allowEnterKey: false,
+                toast: true,
+                icon: 'warning',
+                title: '<h4>O tempo acabou!</h4>',
+                timer: 2000,
+                timerProgressBar: true,
+                color: '#ffc282',
+                position: 'top-end',
+                showConfirmButton: false,
+                background: '#383838',
+                confirmButtonColor: '#313131',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
         }
         document.getElementById('cron').innerText = `${extraZero(minutes)}:${extraZero(seconds)}:${extraZero2(milliseconds)}`
     }
@@ -177,7 +201,7 @@
                     allowEnterKey: false,
                     toast: true,
                     icon: 'warning',
-                    text: 'Preencha o espaço!',
+                    title: '<h5>Preencha o espaço!</h5>',
                     timer: 2000,
                     timerProgressBar: true,
                     color: '#E2E2E2',
@@ -197,7 +221,7 @@
                     allowEnterKey: false,
                     toast: true,
                     icon: 'error',
-                    text: `A resposta "${resposta}" está errada!`,
+                    title: `<h6>A resposta "${resposta}" está errada!</h6>`,
                     timer: 2000,
                     timerProgressBar: true,
                     position: 'top-end',
