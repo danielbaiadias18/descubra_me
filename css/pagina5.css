@@ -16,36 +16,40 @@ footer {
 }
 
 #fundo {
-    width: 600px;
+    width: 510px;
     height: 350px;
     margin: auto;
     background-color: #86CAF0;
-    border: 10px solid #3CAAE7;
+    border: 10px solid #0070accd;
     border-radius: .8em;
 }
 
 #contas {
-    width: 320px;
+    width: 230px;
     height: 330px;
     float: left;
     border-top-left-radius: .2em;
     border-bottom-left-radius: .2em;
     color: black;
     text-align: left;
-    margin-top: 3px;
+    margin-top: 5px;
 }
 
 #i1, #i2, #i3, #i4, #i5, #i6 {
-    font-size: 20px;
+    font-size: 28px;
     font-family: 'Courier New', Courier;
     padding: 0px 10px;
     color: rgb(50, 50, 50);
-    margin-left: 25px;
+    margin-left: 30px;
     display: inline;
 }
 
 .input {
-    width: 50px;
+    width: 60px;
+    height: 30px;
+    font-family: 'Courier New', Courier;
+    color: rgb(50, 50, 50);
+    font-size: 25px;
     display: inline;
 }
 
@@ -54,6 +58,13 @@ footer {
     border: none;
     color: white;
     width: auto;
+    font-size: 2em;
+    margin-left: 25px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier;
+    width: 190px;
+    height: 50px;
 }
 
 /* START-CRONOMETRO */
@@ -68,15 +79,19 @@ footer {
 
 #contador {
     text-align: center;
-    text-align: center;
-    font-family: Helvetica Neue;
+    font-family: 'Courier New', Courier;
     padding-top: 45px;
+}
+
+#cron {
+    font-size: 2.7em;
 }
 
 #botoes {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 #botaoStart, #botaoStop, #botaoReset {

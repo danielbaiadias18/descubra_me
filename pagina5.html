@@ -23,26 +23,32 @@
             <div id="fundo">
                 <div id="contas">
 
-                    <div><p id="i1"></p><input class="input" type="text"></div>
-                    <div><p id="i2"></p><input class="input" type="text"></div>
-                    <div><p id="i3"></p><input class="input" type="text"></div>
-                    <div><p id="i4"></p><input class="input" type="text"></div>
-                    <div><p id="i5"></p><input class="input" type="text"></div>
-                    <div><p id="i6"></p><input class="input" type="text"></div>
+                    <div>
+                        <p id="i1"></p><input onclick="submit()" class="input" type="text">
+                    </div>
+                    <div>
+                        <p id="i2"></p><input onclick="submit()" class="input" type="text">
+                    </div>
+                    <div>
+                        <p id="i3"></p><input onclick="submit()" class="input" type="text">
+                    </div>
+                    <div>
+                        <p id="i4"></p><input onclick="submit()" class="input" type="text">
+                    </div>
+                    <div>
+                        <p id="i5"></p><input onclick="submit()" class="input" type="text">
+                    </div>
+                    <div>
+                        <p id="i6"></p><input onclick="submit()" class="input" type="text">
+                    </div>
                     </ul>
-                    LEMBRETES:
-                    <p style="color: white;">1-FAZER UMA COLUNA DE INPUTS RETOS</p>
-                    <p style="color: white;">2-CONSERTAR A CONFIRMACAO</p>
-                    <p style="color: white;">3-SISTEMA DE RESPOSTAS</p>
-                    <p style="color: white;">4-STYLE TOTAL</p>
-
                     <button id="submit" onclick="submit()">submit</button>
 
                 </div>
                 <div id="cronometro">
 
                     <div id="contador">
-                        <h1 id="cron">00:00:000</h1>
+                        <p id="cron">00:00:000</p>
                     </div>
 
                     <div id="botoes">
@@ -91,9 +97,23 @@
     var resposta = document.getElementById("resposta").value;
 
     for (var num = 1; num <= 6; num++) {
+
+
         var valor1 = Math.floor((Math.random() * 9) + 1)
         var valor2 = Math.floor((Math.random() * 9) + 1)
-        var li = document.getElementById(`i${num}`).innerText = `${valor1} x ${valor2} = ${valor1 * valor2}`
+        var li = document.getElementById(`i${num}`)
+        var conta = `${valor1} x ${valor2} =`
+
+        var input = document.getElementsByClassName('input');
+
+        function confirm() {
+            if (input == valor1 * valor2) {
+                input.style.display = "none"
+                input.innerText = `${valor1 * valor2} ✓`
+            }
+        }
+
+        li.innerText = conta
     }
 
 
@@ -143,7 +163,7 @@
         minutes = 0
         milliseconds = 0
 
-        document.getElementById('cron').innerText = '00:00:000'
+        document.getElementById('cron').innerText = `00:00:000`
     }
 
     function timer() {
