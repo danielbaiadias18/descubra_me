@@ -24,22 +24,22 @@
                 <div id="contas">
 
                     <div>
-                        <p id="i1"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i1"></p><input onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i2"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i2"></p><input onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i3"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i3"></p><input onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i4"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i4"></p><input onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i5"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i5"></p><input onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i6"></p><input onclick="submit()" class="input" type="text">
+                        <p id="i6"></p><input onclick="submit()" class="input">
                     </div>
                     </ul>
                     <button id="submit" onclick="submit()">submit</button>
@@ -96,26 +96,37 @@
     document.getElementById('resposta').focus();
     var resposta = document.getElementById("resposta").value;
 
-    for (var num = 1; num <= 6; num++) {
+    const contas = []
 
+    for (var num = 1; num <= 6; num++) {
 
         var valor1 = Math.floor((Math.random() * 9) + 1)
         var valor2 = Math.floor((Math.random() * 9) + 1)
+        valor1 = Number(valor1)
+        valor2 = Number(valor2)
         var li = document.getElementById(`i${num}`)
         var conta = `${valor1} x ${valor2} =`
-
-        var input = document.getElementsByClassName('input');
-
-        function confirm() {
-            if (input == valor1 * valor2) {
-                input.style.display = "none"
-                input.innerText = `${valor1 * valor2} ✓`
-            }
-        }
+        var resultado = valor1 * valor2;
 
         li.innerText = conta
+        contas.push(conta)
+        console.log(contas)
+        console.log(conta)
+        console.log(resultado)
     }
 
+    var input = document.getElementById('input')
+
+    function submit() {
+
+        var confirm = document.getElementsByClassName('confirmacao');
+
+        if (input == valor1 * valor2) {
+            input.style.display = "none"
+            input.innerText = `${valor1 * valor2} ✓`
+            confirm.style.display = 'block';
+        }
+    }
 
     var seconds = 0;
     var minutes = 0;
@@ -201,14 +212,7 @@
         document.getElementById('cron').innerText = `${extraZero(minutes)}:${extraZero(seconds)}:${extraZero2(milliseconds)}`
     }
 
-    function submit() {
 
-        var confirm = document.getElementById('confirmacao')
-
-        confirm.style.display = 'block';
-
-
-    }
 
     function enviarResposta() {
 
