@@ -9,8 +9,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css">
     <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/pagina5.css">
@@ -52,11 +50,12 @@
                     </div>
 
                     <div id="botoes">
-                        <button id="botaoStart" onclick="start()">start</button>
-                        <button id="botaoStop" onclick="stop()">stop</button>
-                        <button id="botaoReset" onclick="reset()">reset</button>
+                        <button id="botaoStart" onclick="start()">start <p class="dicaBotao">Space-bar</p></button>
+                        <button id="botaoStop" onclick="stop()">stop<p class="dicaBotao">Space-bar</p></button>
+                        <button id="botaoReset" onclick="reset()">reset <p class="dicaBotao">Esc</p></button>
+                        ARRUMA O SISTEMA DE APERTAR OS BOTOES E ATIVAR O CRONOMETRO
                     </div>
-
+<p></p>
                 </div>
                 <div id="confirmacao">
 
@@ -96,23 +95,18 @@
     document.getElementById('resposta').focus();
     var resposta = document.getElementById("resposta").value;
 
-    const contas = []
-
     for (var num = 1; num <= 6; num++) {
 
         var valor1 = Math.floor((Math.random() * 9) + 1)
         var valor2 = Math.floor((Math.random() * 9) + 1)
-        valor1 = Number(valor1)
-        valor2 = Number(valor2)
         var li = document.getElementById(`i${num}`)
         var conta = `${valor1} x ${valor2} =`
-        var resultado = valor1 * valor2;
+        var contaX = valor1 * valor2
+
 
         li.innerText = conta
-        contas.push(conta)
-        console.log(contas)
         console.log(conta)
-        console.log(resultado)
+        console.log(contaX)
     }
 
     var input = document.getElementById('input')
@@ -121,10 +115,10 @@
 
         var confirm = document.getElementsByClassName('confirmacao');
 
-        if (input == valor1 * valor2) {
-            input.style.display = "none"
-            input.innerText = `${valor1 * valor2} ✓`
-            confirm.style.display = 'block';
+        if (contaX == input.value) {
+            input.style.display = 'none'
+            input.innerText = '✓'
+            console.log(contaX)
         }
     }
 
@@ -148,25 +142,63 @@
         }
     }
 
+    var btnStart = document.getElementById('botaoStart');
+    var btnStop = document.getElementById('botaoStop');
+
+    var troca = true;
+
     function start() {
         timer()
         clearInterval(interval)
         interval = setInterval(timer, 10)
 
-        document.getElementById('botaoStart').style.display = 'none'
-        document.getElementById('botaoStop').style.display = 'block'
+        btnStart.style.display = 'none'
+        btnStop.style.display = 'block'
+    }
+
+    if (troca === true) {
+        document.addEventListener('keypress', function (evento) {
+
+            if (evento.keyCode === 32) {
+
+                const botaoSpace = document.querySelector('#botaoStart');
+
+                botaoSpace.click();
+
+                function start() { }
+
+                troca = false;
+            }
+        })
     }
 
     function stop() {
         clearInterval(interval)
-        document.getElementById('botaoStart').style.display = 'block'
-        document.getElementById('botaoStop').style.display = 'none'
+
+        btnStart.style.display = 'block'
+        btnStop.style.display = 'none'
+    }
+
+    if (troca === false) {
+        document.addEventListener('keypress', function (evento) {
+
+            if (evento.keyCade === 32) {
+
+                const botaoSpace = document.querySelector('#botaoStop');
+
+                botaoSpace.click();
+
+                function stop() { }
+
+                troca = true;
+            }
+        })
     }
 
     function reset() {
 
-        document.getElementById('botaoStart').style.display = 'block'
-        document.getElementById('botaoStop').style.display = 'none'
+        btnStart.style.display = 'block'
+        btnStop.style.display = 'none'
 
         clearInterval(interval)
 
@@ -176,6 +208,20 @@
 
         document.getElementById('cron').innerText = `00:00:000`
     }
+
+
+    document.addEventListener('keypress', function (evento) {
+
+        if (evento.key === "Escape") {
+
+            const botaoEsc = document.querySelector('#botaoReset');
+
+            botaoEsc.click();
+
+            function reset() { }
+
+        }
+    })
 
     function timer() {
         if ((milliseconds += 10) == 1000) {
