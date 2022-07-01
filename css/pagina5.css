@@ -1,3 +1,5 @@
+
+
 #dica {
     color: gray;
     position: absolute;
@@ -20,6 +22,8 @@ footer {
     background-color: #86CAF0;
     border: 10px solid #0070accd;
     border-radius: .8em;
+    animation: remelexo linear infinite;
+    animation-duration: 10s;
 }
 
 #contas {
@@ -43,7 +47,7 @@ footer {
     font-family: 'Courier New', Courier;
     padding: 0px 10px;
     color: rgb(50, 50, 50);
-    margin-left: 30px;
+    margin-left: 16px;
     display: inline;
 }
 
@@ -55,18 +59,31 @@ footer {
     display: inline;
 }
 
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 #submit {
     background-color: #3CAAE7;
     border: none;
     color: white;
     width: auto;
     font-size: 2em;
-    margin-left: 25px;
+    margin-left: 15px;
     margin-top: 10px;
     border-radius: 10px;
     font-family: 'Courier New', Courier;
     width: 190px;
     height: 50px;
+    outline: none;
+}
+
+#submit:hover {
+    background-color: #219de0;
+    color: rgb(231, 231, 231);
+    
 }
 
 /* START-CRONOMETRO */
@@ -82,13 +99,12 @@ footer {
 #contador {
     text-align: center;
     font-family: 'Courier New', Courier;
-    padding-top: 45px;
+    padding-top: 35px;
 }
 
 #cron {
     font-size: 2.7em;
-    background-color: #3CAAE7;
-    margin: 0px 5px;
+    margin: 0px 10px;
     border-radius: 5px;
 
 }
@@ -103,25 +119,28 @@ footer {
 #botaoStart,
 #botaoStop,
 #botaoReset {
-    width: 120px;
+    width: 115px;
     height: 60px;
-    border: none;
+    padding-top: 5px;
     color: white;
     font-size: 1.5em;
     font-family: Courier;
     font-weight: bold;
-}
-
-.dicaBotao {
-    font-size: 10px;
+    transition-duration: .5s;
+    outline: none;    
 }
 
 #botaoStart {
-
-    background-color: green;
     display: block;
     margin-right: 5px;
-    color: #a7ffa7e1;
+    border: 2px solid green;
+    color: rgb(132, 237, 132);
+    background-color: green;
+}
+
+#botaoStart:hover {
+    color: green;
+    background-color: rgba(0, 255, 0, 0.336);
 }
 
 #botaoStop {
@@ -129,13 +148,24 @@ footer {
     display: none;
     margin-right: 5px;
     color: rgb(216, 216, 216);
+    border: 2px solid gray;
+}
 
+#botaoStop:hover {
+    color: gray;
+    background-color: rgba(176, 176, 176, 0.574);
 }
 
 #botaoReset {
-    background-color: red;
+    background-color: #e80000;
+    border: 2px solid #e80000;
     margin-left: 5px;
     color: rgb(255, 171, 171);
+}
+
+#botaoReset:hover {
+    color: #e80000;
+    background-color: rgba(255, 127, 127, 0.853);
 }
 
 /* END-CRONOMETRO */

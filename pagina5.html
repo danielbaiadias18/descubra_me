@@ -22,22 +22,22 @@
                 <div id="contas">
 
                     <div>
-                        <p id="i1"></p><input onclick="submit()" class="input">
+                        <p id="i1"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i2"></p><input onclick="submit()" class="input">
+                        <p id="i2"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i3"></p><input onclick="submit()" class="input">
+                        <p id="i3"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i4"></p><input onclick="submit()" class="input">
+                        <p id="i4"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i5"></p><input onclick="submit()" class="input">
+                        <p id="i5"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     <div>
-                        <p id="i6"></p><input onclick="submit()" class="input">
+                        <p id="i6"></p><input type="number" onclick="submit()" class="input">
                     </div>
                     </ul>
                     <button id="submit" onclick="submit()">submit</button>
@@ -48,14 +48,12 @@
                     <div id="contador">
                         <p id="cron">00:00:000</p>
                     </div>
-
+ 
                     <div id="botoes">
-                        <button id="botaoStart" onclick="start()">start <p class="dicaBotao">Space-bar</p></button>
-                        <button id="botaoStop" onclick="stop()">stop<p class="dicaBotao">Space-bar</p></button>
-                        <button id="botaoReset" onclick="reset()">reset <p class="dicaBotao">Esc</p></button>
-                        ARRUMA O SISTEMA DE APERTAR OS BOTOES E ATIVAR O CRONOMETRO
+                        <button id="botaoStart" onclick="start()">start </button>
+                        <button id="botaoStop" onclick="stop()">stop</button>
+                        <button id="botaoReset" onclick="reset()">reset</button>
                     </div>
-<p></p>
                 </div>
                 <div id="confirmacao">
 
@@ -97,28 +95,27 @@
 
     for (var num = 1; num <= 6; num++) {
 
-        var valor1 = Math.floor((Math.random() * 9) + 1)
-        var valor2 = Math.floor((Math.random() * 9) + 1)
+        var randomN1 = Math.floor((Math.random() * 9) + 1)
+        var randomN2 = Math.floor((Math.random() * 9) + 1)
         var li = document.getElementById(`i${num}`)
-        var conta = `${valor1} x ${valor2} =`
-        var contaX = valor1 * valor2
-
+        var conta = `${randomN1} x ${randomN2} =`
+        var result = randomN1 * randomN2
 
         li.innerText = conta
-        console.log(conta)
-        console.log(contaX)
     }
 
-    var input = document.getElementById('input')
+
+
+    var input = document.getElementsByClassName('input')
 
     function submit() {
 
         var confirm = document.getElementsByClassName('confirmacao');
 
-        if (contaX == input.value) {
+        if (result == input.value) {
             input.style.display = 'none'
             input.innerText = '✓'
-            console.log(contaX)
+            console.log(result)
         }
     }
 
@@ -156,21 +153,21 @@
         btnStop.style.display = 'block'
     }
 
-    if (troca === true) {
-        document.addEventListener('keypress', function (evento) {
+    // if (troca === true) {
+    //     document.addEventListener('keypress', function (evento) {
 
-            if (evento.keyCode === 32) {
+    //         if (evento.keyCode === 32) {
 
-                const botaoSpace = document.querySelector('#botaoStart');
+    //             const botaoSpace = document.querySelector('#botaoStart');
 
-                botaoSpace.click();
+    //             botaoSpace.click();
 
-                function start() { }
+    //             function start() { }
 
-                troca = false;
-            }
-        })
-    }
+    //             troca = false;
+    //         }
+    //     })
+    // }
 
     function stop() {
         clearInterval(interval)
@@ -179,21 +176,21 @@
         btnStop.style.display = 'none'
     }
 
-    if (troca === false) {
-        document.addEventListener('keypress', function (evento) {
+    // if (troca === true) {
+    //     document.addEventListener('keypress', function (evento) {
 
-            if (evento.keyCade === 32) {
+    //         if (evento.keyCade === 32) {
 
-                const botaoSpace = document.querySelector('#botaoStop');
+    //             const botaoSpace = document.querySelector('#botaoStop');
 
-                botaoSpace.click();
+    //             botaoSpace.click();
 
-                function stop() { }
+    //             function stop() { }
 
-                troca = true;
-            }
-        })
-    }
+    //             troca = true;
+    //         }
+    //     })
+    // }
 
     function reset() {
 
@@ -209,19 +206,18 @@
         document.getElementById('cron').innerText = `00:00:000`
     }
 
+    // document.addEventListener('keypress', function (evento) {
 
-    document.addEventListener('keypress', function (evento) {
+    //     if (evento.keyCode === 27) {
 
-        if (evento.key === "Escape") {
+    //         const botaoEsc = document.querySelector('#botaoReset');
 
-            const botaoEsc = document.querySelector('#botaoReset');
+    //         botaoEsc.click();
 
-            botaoEsc.click();
+    //         function reset() { }
 
-            function reset() { }
-
-        }
-    })
+    //     }
+    // })
 
     function timer() {
         if ((milliseconds += 10) == 1000) {
