@@ -13,18 +13,96 @@
     <title>Descubra_me</title>
     <style>
         #dica {
-            color: gray;
             position: absolute;
             bottom: 50%;
-            left: 12%;
             text-align: center;
         }
 
-        footer{
+        footer {
             color: rgb(45, 45, 45);
             position: absolute;
             bottom: 5px;
             right: 5px;
+        }
+
+        #clickViewDiv {
+            margin-top: 50px;
+        }
+
+        .cores {
+            width: 120px;
+            height: 120px;
+            margin: 0px 10px;
+            display: inline-flex;
+            transition-duration: .2s;
+        }
+
+        #azul {
+            background-color: rgb(57, 57, 255);
+            border: 3px solid rgb(0, 0, 216);
+            outline: none;
+
+        }
+
+        #amarelo {
+            background-color: rgb(255, 255, 86);
+            border: 3px solid rgb(208, 208, 0);
+            outline: none;
+
+        }
+
+        #vermelho {
+            background-color: rgb(255, 88, 88);
+            border: 3px solid rgb(219, 0, 0);
+            outline: none;
+
+        }
+
+        #verde {
+            background-color: rgb(73, 255, 73);
+            border: 3px solid rgb(0, 160, 0);
+            outline: none;
+
+        }
+
+        #azul:hover {
+            background-color: rgb(0, 0, 216);
+            border: 3px solid rgb(57, 57, 255);
+            outline: none;
+
+        }
+
+        #amarelo:hover {
+            background-color: rgb(208, 208, 0);
+            border: 3px solid rgb(255, 255, 86);
+            outline: none;
+
+        }
+
+        #vermelho:hover {
+            background-color: rgb(219, 0, 0);
+            border: 3px solid rgb(255, 88, 88);
+            outline: none;
+
+        }
+
+        #verde:hover {
+            background-color: rgb(0, 160, 0);
+            border: 3px solid rgb(46, 210, 46);
+            outline: none;
+
+        }
+
+        .clickView {
+            width: 50px;
+            height: 50px;
+            border: 1px solid white;
+            display: inline-flex;
+            border-collapse: collapse;
+        }
+
+        #lista {
+            color: white;
         }
     </style>
 
@@ -36,8 +114,25 @@
             </h2>
         </div>
         <div class="container">
-            <div id="dica" class="col-7 offset-1">
-                [- Desafio de sequencia de cores! -]
+            <div id="dica">
+                <div id="botoesId">
+                    <button onclick="retornaCor(1)" class="cores" id="azul"></button>
+                    <button onclick="retornaCor(2)" class="cores" id="amarelo"></button>
+                    <button onclick="retornaCor(3)" class="cores" id="vermelho"></button>
+                    <button onclick="retornaCor(4)" class="cores" id="verde"></button>
+                </div>
+                <div id="clickViewDiv" class="col-6 offset-3 row-1">
+                    <div id="view1" class="clickView"></div>
+                    <div id="view2" class="clickView"></div>
+                    <div id="view3" class="clickView"></div>
+                    <div id="view4" class="clickView"></div>
+                    <div id="lista">
+                        <h2>Lista</h2>
+                        <p>1- Entender o codigo novo</p>
+                        <p>2- Arrumar o style</p>
+                        <p>3- Desafio:Ao clicar em algum desses quadrados com cor(clickView) ele desaparece e o que esta na frente volta</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -61,13 +156,64 @@
 </html>
 
 <script>
+
+    var view1 = document.getElementById("view1")
+    var view2 = document.getElementById("view2")
+    var view3 = document.getElementById("view3")
+    var view4 = document.getElementById("view4")
+
+    var respostaCores = []
+
+    function limpaRespostaCores() {
+        respostaCores = [];
+        view1.style.backgroundColor = "transparent";
+        view2.style.backgroundColor = "transparent";
+        view3.style.backgroundColor = "transparent";
+        view4.style.backgroundColor = "transparent";
+    }
+
+    function atualizaViews() {
+        view1.style.backgroundColor = respostaCores[0];
+        view2.style.backgroundColor = respostaCores[1];
+        view3.style.backgroundColor = respostaCores[2];
+        view4.style.backgroundColor = respostaCores[3];
+    }
+
+    function adicionaResposta(cor) {
+        if (respostaCores.length <= 3) {
+            respostaCores.push(cor);
+            atualizaViews();
+
+        }
+
+        if (respostaCores.length == 4) {
+            enviarResposta();
+        }
+    }
+
+    function retornaCor(idCor) {
+        switch (idCor) {
+            case 1:
+                return adicionaResposta("#0000ff");
+            case 2:
+                return adicionaResposta("#ffff00");
+            case 3:
+                return adicionaResposta("#ff0000");
+            case 4:
+                return adicionaResposta("#00ff00");
+            default:
+                return adicionaResposta("#000000");
+        }
+    }
+
     document.getElementById('resposta').focus();
 
     function enviarResposta() {
 
         var resposta = document.getElementById("resposta").value;
-
-        if (resposta == '???') {
+        console.log(respostaCores === ["#0000ff", "#0000ff", "#0000ff", "#0000ff"]);
+        debugger
+        if (JSON.stringify(respostaCores)==JSON.stringify(["#ffff00", "#0000ff","#ff0000", "#00ff00"])) {
 
             var url = window.location.href;
 
@@ -81,27 +227,20 @@
 
         } else {
 
-            if (resposta.length == 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title:'[ERROR]',
-                    text:'Preencha o espaço!',
-                    background: '#383838',
-                    color: '#E2E2E2',
-                    confirmButtonColor: '#313131',
-                })
-            } else {
 
-                Swal.fire({
-                    icon: 'error',
-                    title: '[ERROR]',
-                    text: `A resposta "${resposta}" está errada!`,
-                    background: '#383838',
-                    color: '#E2E2E2',
-                    confirmButtonColor: '#313131',
-                })
-            }
+
+            Swal.fire({
+                icon: 'error',
+                title: '[ERROR]',
+                text: `A resposta está errada!`,
+                background: '#383838',
+                color: '#E2E2E2',
+                confirmButtonColor: '#313131',
+            })
+
         }
+
+        limpaRespostaCores();
     }
 
 
