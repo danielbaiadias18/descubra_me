@@ -29,9 +29,25 @@
             margin-top: 50px;
         }
 
+        #view1,
+        #view2,
+        #view3,
+        #view4 {
+            outline: none;
+            background-color: transparent;
+        }
+
+        #view1:hover,
+        #view2:hover,
+        #view3:hover,
+        #view4:hover {
+            outline: none;
+            background-color: rgb(30, 30, 30);
+        }
+
         .cores {
-            width: 120px;
-            height: 120px;
+            width: 118px;
+            height: 118px;
             margin: 0px 10px;
             display: inline-flex;
             transition-duration: .2s;
@@ -69,28 +85,36 @@
             background-color: rgb(0, 0, 216);
             border: 3px solid rgb(57, 57, 255);
             outline: none;
-
+            width: 120px;
+            height: 120px;
+            margin: 0px 9px;
         }
 
         #amarelo:hover {
             background-color: rgb(208, 208, 0);
             border: 3px solid rgb(255, 255, 86);
             outline: none;
-
+            width: 120px;
+            height: 120px;
+            margin: 0px 9px;
         }
 
         #vermelho:hover {
             background-color: rgb(219, 0, 0);
             border: 3px solid rgb(255, 88, 88);
             outline: none;
-
+            width: 120px;
+            height: 120px;
+            margin: 0px 9px;
         }
 
         #verde:hover {
             background-color: rgb(0, 160, 0);
             border: 3px solid rgb(46, 210, 46);
             outline: none;
-
+            width: 120px;
+            height: 120px;
+            margin: 0px 9px;
         }
 
         .clickView {
@@ -101,9 +125,6 @@
             border-collapse: collapse;
         }
 
-        #lista {
-            color: white;
-        }
     </style>
 
 <body>
@@ -122,28 +143,12 @@
                     <button onclick="retornaCor(4)" class="cores" id="verde"></button>
                 </div>
                 <div id="clickViewDiv" class="col-6 offset-3 row-1">
-                    <div id="view1" class="clickView"></div>
-                    <div id="view2" class="clickView"></div>
-                    <div id="view3" class="clickView"></div>
-                    <div id="view4" class="clickView"></div>
-                    <div id="lista">
-                        <h2>Lista</h2>
-                        <p>1- Entender o codigo novo</p>
-                        <p>2- Arrumar o style</p>
-                        <p>3- Desafio:Ao clicar em algum desses quadrados com cor(clickView) ele desaparece e o que esta na frente volta</p>
+                    <button onclick="retornaView(1)" id="view1" class="clickView"></button>
+                    <button onclick="retornaView(2)" id="view2" class="clickView"></button>
+                    <button onclick="retornaView(3)" id="view3" class="clickView"></button>
+                    <button onclick="retornaView(4)" id="view4" class="clickView"></button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div id="divResposta">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <input type="text" name="resposta" id="resposta" maxlength="100"
-                    placeholder="Escreva sua resposta aqui">
-            </div>
-            <div class="col-1" style="padding-left: 0;">
-                <button id="botaoResposta" onclick="enviarResposta()"><span style="width: 100%;">></span></button>
             </div>
         </div>
     </div>
@@ -156,6 +161,13 @@
 </html>
 
 <script>
+    
+    setTimeout(function() {
+        var guiaCores = document.getElementById("pergunta");
+
+        guiaCores.style.visibility = "hidden"
+       
+    }, 2000)
 
     var view1 = document.getElementById("view1")
     var view2 = document.getElementById("view2")
@@ -163,6 +175,11 @@
     var view4 = document.getElementById("view4")
 
     var respostaCores = []
+    var views = []
+
+    function a() {
+
+    }
 
     function limpaRespostaCores() {
         respostaCores = [];
@@ -182,8 +199,8 @@
     function adicionaResposta(cor) {
         if (respostaCores.length <= 3) {
             respostaCores.push(cor);
+            console.log("aaa")
             atualizaViews();
-
         }
 
         if (respostaCores.length == 4) {
@@ -206,14 +223,27 @@
         }
     }
 
-    document.getElementById('resposta').focus();
+    function retornaView(idVIew) {
+        switch (idView) {
+            case 1:
+                return views.splice(0);
+            case 2:
+                return views.splice(1);
+            case 3:
+                return views.splice(2);
+            case 4:
+                return views.splice(3);
+            default:
+                return views = [];
+        }
+    }
+
 
     function enviarResposta() {
 
-        var resposta = document.getElementById("resposta").value;
         console.log(respostaCores === ["#0000ff", "#0000ff", "#0000ff", "#0000ff"]);
         debugger
-        if (JSON.stringify(respostaCores)==JSON.stringify(["#ffff00", "#0000ff","#ff0000", "#00ff00"])) {
+        if (JSON.stringify(respostaCores) == JSON.stringify(["#ffff00", "#0000ff","#ff0000", "#00ff00"])) {
 
             var url = window.location.href;
 
