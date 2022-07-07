@@ -13,9 +13,9 @@
     <title>Descubra_me</title>
     <style>
         #dica {
-            position: absolute;
-            bottom: 50%;
+            margin: auto;
             text-align: center;
+            margin-top: 100px;
         }
 
         footer {
@@ -29,27 +29,10 @@
             margin-top: 50px;
         }
 
-        #view1,
-        #view2,
-        #view3,
-        #view4 {
-            outline: none;
-            background-color: transparent;
-        }
-
-        #view1:hover,
-        #view2:hover,
-        #view3:hover,
-        #view4:hover {
-            outline: none;
-            background-color: rgb(30, 30, 30);
-        }
-
         .cores {
             width: 118px;
             height: 118px;
-            margin: 0px 10px;
-            display: inline-flex;
+            margin: 10px;
             transition-duration: .2s;
         }
 
@@ -87,7 +70,7 @@
             outline: none;
             width: 120px;
             height: 120px;
-            margin: 0px 9px;
+            margin: 9px;
         }
 
         #amarelo:hover {
@@ -96,7 +79,7 @@
             outline: none;
             width: 120px;
             height: 120px;
-            margin: 0px 9px;
+            margin: 9px;
         }
 
         #vermelho:hover {
@@ -105,7 +88,7 @@
             outline: none;
             width: 120px;
             height: 120px;
-            margin: 0px 9px;
+            margin: 9px;
         }
 
         #verde:hover {
@@ -114,7 +97,7 @@
             outline: none;
             width: 120px;
             height: 120px;
-            margin: 0px 9px;
+            margin: 9px;
         }
 
         .clickView {
@@ -124,7 +107,6 @@
             display: inline-flex;
             border-collapse: collapse;
         }
-
     </style>
 
 <body>
@@ -134,23 +116,25 @@
                 Siga a sequencia: verde, azul, vermelho, amarelo
             </h2>
         </div>
-        <div class="container">
-            <div id="dica">
-                <div id="botoesId">
+        <div id="dica">
+            <div id="botoesId">
+                <!-- <div class="col-6 col-md-12"> -->
                     <button onclick="retornaCor(1)" class="cores" id="azul"></button>
                     <button onclick="retornaCor(2)" class="cores" id="amarelo"></button>
+                <!-- </div> -->
+                <!-- <div class="col-6 col-md-12"> -->
                     <button onclick="retornaCor(3)" class="cores" id="vermelho"></button>
                     <button onclick="retornaCor(4)" class="cores" id="verde"></button>
-                </div>
-                <div id="clickViewDiv" class="col-6 offset-3 row-1">
-                    <button onclick="retornaView(1)" id="view1" class="clickView"></button>
-                    <button onclick="retornaView(2)" id="view2" class="clickView"></button>
-                    <button onclick="retornaView(3)" id="view3" class="clickView"></button>
-                    <button onclick="retornaView(4)" id="view4" class="clickView"></button>
-                    </div>
-                </div>
+                <!-- </div> -->
+            </div>
+            <div id="clickViewDiv" class="col-6 offset-3 row-1">
+                <div class="clickView" id="view1" onclick="removeColor(1)"></div>
+                <div class="clickView" id="view2" onclick="removeColor(2)"></div>
+                <div class="clickView" id="view3" onclick="removeColor(3)"></div>
+                <div class="clickView" id="view4" onclick="removeColor(4)"></div>
             </div>
         </div>
+    </div>
     </div>
     <footer>
         3
@@ -161,25 +145,31 @@
 </html>
 
 <script>
-    
-    setTimeout(function() {
+
+    setTimeout(function () {
         var guiaCores = document.getElementById("pergunta");
 
         guiaCores.style.visibility = "hidden"
-       
-    }, 2000)
 
-    var view1 = document.getElementById("view1")
-    var view2 = document.getElementById("view2")
-    var view3 = document.getElementById("view3")
-    var view4 = document.getElementById("view4")
+    }, 3000);
+
+    var view1 = document.getElementById("view1");
+    var view2 = document.getElementById("view2");
+    var view3 = document.getElementById("view3");
+    var view4 = document.getElementById("view4");
+    var views = document.getElementsByClassName("clickView");
 
     var respostaCores = []
-    var views = []
 
-    function a() {
-
-    }
+    function removeColor(param) {
+        var view = document.getElementById(`view${param}`);
+        console.log(respostaCores, "antes do splice()");
+        respostaCores.splice(param - 1, 1);
+        console.log(respostaCores, "depois do splice()");
+        atualizaViews();
+        console.log(respostaCores, "depois do atualizaViews()")
+        
+    };
 
     function limpaRespostaCores() {
         respostaCores = [];
@@ -199,7 +189,6 @@
     function adicionaResposta(cor) {
         if (respostaCores.length <= 3) {
             respostaCores.push(cor);
-            console.log("aaa")
             atualizaViews();
         }
 
@@ -223,27 +212,11 @@
         }
     }
 
-    function retornaView(idVIew) {
-        switch (idView) {
-            case 1:
-                return views.splice(0);
-            case 2:
-                return views.splice(1);
-            case 3:
-                return views.splice(2);
-            case 4:
-                return views.splice(3);
-            default:
-                return views = [];
-        }
-    }
-
-
     function enviarResposta() {
 
-        console.log(respostaCores === ["#0000ff", "#0000ff", "#0000ff", "#0000ff"]);
+        console.log(respostaCores === ["#ff0000", "#0000ff", "#0000ff", "#0000ff"]);
         debugger
-        if (JSON.stringify(respostaCores) == JSON.stringify(["#ffff00", "#0000ff","#ff0000", "#00ff00"])) {
+        if (JSON.stringify(respostaCores) == JSON.stringify(["#ff0000", "#00ff00", "#00ff00", "#0000ff"])) {
 
             var url = window.location.href;
 
@@ -286,5 +259,4 @@
 
         }
     })
-
 </script>
