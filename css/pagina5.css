@@ -1,5 +1,3 @@
-
-
 #dica {
     color: gray;
     position: absolute;
@@ -35,6 +33,35 @@ footer {
     color: black;
     text-align: left;
     margin-top: 5px;
+}
+
+
+#blur {
+    font-family: 'Courier New', Courier;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 230px;
+    height: 258px;
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 155px;
+    left: 118px;
+    z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.3);
+}
+
+@keyframes blurSlide {
+
+    0% {
+        height: 258px;
+    }
+
+    100% {
+        height: 0px;
+    }
 }
 
 #i1,
@@ -83,7 +110,7 @@ input::-webkit-inner-spin-button {
 #submit:hover {
     background-color: #219de0;
     color: rgb(231, 231, 231);
-    
+
 }
 
 /* START-CRONOMETRO */
@@ -127,7 +154,7 @@ input::-webkit-inner-spin-button {
     font-family: Courier;
     font-weight: bold;
     transition-duration: .5s;
-    outline: none;    
+    outline: none;
 }
 
 #botaoStart {

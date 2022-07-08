@@ -16,11 +16,11 @@
     <title>Descubra_me</title>
 
 <body>
+    <div id="blur">Click in start <br> to view</div>
     <div id="divPergunta">
         <div id="dica" class="col">
             <div id="fundo">
                 <div id="contas">
-
                     <div>
                         <p id="i1"></p><input type="number" onclick="submit()" class="input">
                     </div>
@@ -48,7 +48,7 @@
                     <div id="contador">
                         <p id="cron">00:00:000</p>
                     </div>
- 
+
                     <div id="botoes">
                         <button id="botaoStart" onclick="start()">start </button>
                         <button id="botaoStop" onclick="stop()">stop</button>
@@ -89,33 +89,31 @@
 </html>
 
 <script>
+    contas()
 
     document.getElementById('resposta').focus();
     var resposta = document.getElementById("resposta").value;
 
-    for (var num = 1; num <= 6; num++) {
+    function contas() {
+        for (var num = 1; num <= 6; num++) {
 
-        var randomN1 = Math.floor((Math.random() * 9) + 1)
-        var randomN2 = Math.floor((Math.random() * 9) + 1)
-        var li = document.getElementById(`i${num}`)
-        var conta = `${randomN1} x ${randomN2} =`
-        var result = randomN1 * randomN2
+            var randomN1 = Math.floor((Math.random() * 9) + 1)
+            var randomN2 = Math.floor((Math.random() * 9) + 1)
+            var li = document.getElementById(`i${num}`)
+            var conta = `${randomN1} x ${randomN2} =`
+            var result = randomN1 * randomN2
 
-        li.innerText = conta
+            li.innerText = conta
+        }
     }
 
-
-
-    var input = document.getElementsByClassName('input')
 
     function submit() {
 
         var confirm = document.getElementsByClassName('confirmacao');
 
-        if (result == input.value) {
-            input.style.display = 'none'
-            input.innerText = '✓'
-            console.log(result)
+        if (JSON.stringify(contas) === JSON.stringify(input.value)) {
+            contas()
         }
     }
 
@@ -144,7 +142,13 @@
 
     var troca = true;
 
+    var blur = document.getElementById("blur");
+
     function start() {
+        blur.style.animation = "blurSlide .3s linear"
+        blur.style.animationFillMode = "forwards"
+        blur.innerText = ""
+
         timer()
         clearInterval(interval)
         interval = setInterval(timer, 10)
@@ -172,6 +176,9 @@
     function stop() {
         clearInterval(interval)
 
+        blur.style.animation = ""
+        blur.innerHTML = "Click in start <br> to view"
+
         btnStart.style.display = 'block'
         btnStop.style.display = 'none'
     }
@@ -191,8 +198,18 @@
     //         }
     //     })
     // }
+    var input = document.getElementsByClassName('input')
+
+    function limpaInput() {
+        input.value = ""
+    }
 
     function reset() {
+        contas()
+
+        blur.style.animation = ""
+        blur.innerHTML = "Click in start <br> to view" 
+        limpaInput()    
 
         btnStart.style.display = 'block'
         btnStop.style.display = 'none'
