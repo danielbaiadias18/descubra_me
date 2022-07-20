@@ -16,72 +16,123 @@
     <title>Descubra_me</title>
 
 <body>
-    <div id="blur">Click in start <br> to view</div>
     <div id="divPergunta">
-        <div id="dica" class="col">
+        <div id="dica">
             <div id="fundo">
                 <div id="contas">
-                    <div>
-                        <p id="i1"></p><input type="number" onclick="submit()" class="input">
+                    <div id="blur">Click in start <br> to view</div>
+                    <div
+                    >
+                        <p id="i1"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     <div>
-                        <p id="i2"></p><input type="number" onclick="submit()" class="input">
+                        <p id="i2"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     <div>
-                        <p id="i3"></p><input type="number" onclick="submit()" class="input">
+                        <p id="i3"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     <div>
-                        <p id="i4"></p><input type="number" onclick="submit()" class="input">
+                        <p id="i4"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     <div>
-                        <p id="i5"></p><input type="number" onclick="submit()" class="input">
+                        <p id="i5"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     <div>
-                        <p id="i6"></p><input type="number" onclick="submit()" class="input">
+                        <p id="i6"></p>
+                        <input 
+                            type="number" 
+                            onclick="submit()"  
+                            oninput="javascript: 
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
+                            type="number" 
+                            maxlength="2" 
+                            class="input"
+                        >
                     </div>
                     </ul>
                     <button id="submit" onclick="submit()">submit</button>
 
                 </div>
                 <div id="cronometro">
+                    so falta conferir se as respostas estao certas e fazer o botao funcionar csaso esteja tudo certo
 
                     <div id="contador">
                         <p id="cron">00:00:000</p>
                     </div>
 
                     <div id="botoes">
-                        <button id="botaoStart" onclick="start()">start </button>
+                        <button id="botaoStart" onclick="start()">start</button>
                         <button id="botaoStop" onclick="stop()">stop</button>
                         <button id="botaoReset" onclick="reset()">reset</button>
                     </div>
                 </div>
                 <div id="confirmacao">
+                    <div id="preenchimento"></div>
 
-                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                    </svg>
+                    <div>
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
+
 
                     <div class="slide-right">
-                        <h2>SUCCESS</h2>
+                        <p>SUCCESS</p>
                     </div>
+
 
                 </div>
             </div>
         </div>
     </div>
     </div>
-    <div id="divResposta">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <input type="text" name="resposta" id="resposta" maxlength="100"
-                    placeholder="Escreva sua resposta aqui">
-            </div>
-            <div class="col-1" style="padding-left: 0;">
-                <button id="botaoResposta" onclick="enviarResposta()"><span style="width: 100%;">></span></button>
-            </div>
-        </div>
-    </div>
+
     <footer>5</footer>
 
 </body>
@@ -91,9 +142,6 @@
 <script>
     contas()
 
-    document.getElementById('resposta').focus();
-    var resposta = document.getElementById("resposta").value;
-
     function contas() {
         for (var num = 1; num <= 6; num++) {
 
@@ -101,20 +149,24 @@
             var randomN2 = Math.floor((Math.random() * 9) + 1)
             var li = document.getElementById(`i${num}`)
             var conta = `${randomN1} x ${randomN2} =`
-            var result = randomN1 * randomN2
+            function returnResult() {
+                var result = randomN1 * randomN2
+                return btnStop.innerText = result
+            }
 
             li.innerText = conta
         }
     }
 
-
     function submit() {
 
-        var confirm = document.getElementsByClassName('confirmacao');
+        var confirm = document.getElementById('confirmacao');
 
-        if (JSON.stringify(contas) === JSON.stringify(input.value)) {
-            contas()
-        }
+
+        confirm.style.display = "block"
+        confirm.style.display = "flex"
+        confirm.style.alignItems = "center"
+
     }
 
     var seconds = 0;
@@ -145,7 +197,7 @@
     var blur = document.getElementById("blur");
 
     function start() {
-        blur.style.animation = "blurSlide .3s linear"
+        blur.style.animation = "blurClose .3s linear"
         blur.style.animationFillMode = "forwards"
         blur.innerText = ""
 
@@ -208,8 +260,8 @@
         contas()
 
         blur.style.animation = ""
-        blur.innerHTML = "Click in start <br> to view" 
-        limpaInput()    
+        blur.innerHTML = "Click in start <br> to view"
+        limpaInput()
 
         btnStart.style.display = 'block'
         btnStop.style.display = 'none'

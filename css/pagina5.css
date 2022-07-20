@@ -1,7 +1,5 @@
 #dica {
     color: gray;
-    position: absolute;
-    bottom: 30%;
     margin: auto;
     text-align: center;
 }
@@ -16,17 +14,21 @@ footer {
 #fundo {
     width: 510px;
     height: 350px;
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #86CAF0;
     border: 10px solid #0070accd;
+    box-sizing: border-box;
     border-radius: .8em;
-    animation: remelexo linear infinite;
-    animation-duration: 10s;
 }
 
 #contas {
+    background-color: #86CAF0;
+    z-index: 999999;
     width: 230px;
-    height: 330px;
+    height: 320px;
     float: left;
     border-top-left-radius: .2em;
     border-bottom-left-radius: .2em;
@@ -37,23 +39,25 @@ footer {
 
 
 #blur {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+
     font-family: 'Courier New', Courier;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    width: 230px;
-    height: 258px;
-    backdrop-filter: blur(5px);
-    position: absolute;
-    top: 155px;
-    left: 118px;
+    width: 207px;
+    height: 260px;
+    backdrop-filter: blur(6px);
+    transform: translate(-50%, -50%);
     z-index: 9999;
-    box-shadow: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
-@keyframes blurSlide {
+@keyframes blurClose {
 
     0% {
         height: 258px;
@@ -79,8 +83,8 @@ footer {
 }
 
 .input {
-    width: 60px;
-    height: 30px;
+    width: 55px;
+    height: 32px;
     font-family: 'Courier New', Courier;
     font-size: 25px;
     display: inline;
@@ -205,8 +209,6 @@ input::-webkit-inner-spin-button {
     float: right;
     border-bottom-right-radius: .2em;
     color: black;
-    display: flex;
-    align-items: center;
     display: none;
 }
 
@@ -223,8 +225,13 @@ input::-webkit-inner-spin-button {
 }
 
 .checkmark {
-    width: 56px;
-    height: 56px;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -232,7 +239,6 @@ input::-webkit-inner-spin-button {
     stroke-width: 2;
     stroke: #fff;
     stroke-miterlimit: 10;
-    margin: 10% 10%;
     box-shadow: inset 0px 0px 0px #7ac142;
     animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
@@ -242,6 +248,8 @@ input::-webkit-inner-spin-button {
     stroke-dasharray: 48;
     stroke-dashoffset: 48;
     animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    background-color: white;
+    color: white;
 }
 
 @keyframes stroke {
@@ -270,30 +278,34 @@ input::-webkit-inner-spin-button {
 
 /* END-CHECK-ICON */
 
-/* START-TEXT-"SUCCESS" */
-
-.slide-right {
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 30px;
-    color: white;
-    font-family: 'Sriracha';
-    color: #7ac142;
+#preenchimento {
+    background-color: #86CAF0;
+    width: 90px;
+    height: 110;
 }
 
-.slide-right h2 {
-    animation: 2s slide-right;
+/* START-TEXT-"SUCCESS" */
+
+div.slide-right {
+
+
+    width: 100%;
+    overflow: hidden;
+}
+
+div.slide-right p {
+    animation: slide-right 3s;
+    font-size: 2.1em;
+    font-family: 'Arial Narrow Bold', sans-serifs;
+    color: rgb(111, 193, 91);
 }
 
 @keyframes slide-right {
-    0% {
-        margin-left: -400px;
+    from {
+        margin-left: -300%;
     }
 
-    100% {
+    to {
         margin-left: 0%;
     }
 }
