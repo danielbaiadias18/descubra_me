@@ -31,7 +31,7 @@
 
         .cores {
             width: 118px;
-            height: 118px;
+            height: 119px;
             margin: 10px;
             transition-duration: .2s;
         }
@@ -113,25 +113,26 @@
     <div id="divPergunta">
         <div id="pergunta" class="col-8 offset-2 text-center mt-5">
             <h2 style="color: white;">
-                Siga a sequencia: verde, azul, vermelho, amarelo
+                Siga a sequencia:
+                <span id="verdeS">verde</span>,
+                <span id="azulS">azul</span>,
+                <span id="vermelhoS">vermelho</span>,
+                <span id="amareloS">amarelo</span><br> faz o seguinte: <br>da um jeito de fazer a cor aparecer antes de acertar a sequencia, pq se nao o cliente n vai ter a minima ideia de qual clicar, tem q teruma dica pelo menos  ne vei >:(
+
             </h2>
         </div>
         <div id="dica">
             <div id="botoesId">
-                <!-- <div class="col-6 col-md-12"> -->
-                    <button onclick="retornaCor(1)" class="cores" id="azul"></button>
-                    <button onclick="retornaCor(2)" class="cores" id="amarelo"></button>
-                <!-- </div> -->
-                <!-- <div class="col-6 col-md-12"> -->
-                    <button onclick="retornaCor(3)" class="cores" id="vermelho"></button>
-                    <button onclick="retornaCor(4)" class="cores" id="verde"></button>
-                <!-- </div> -->
+                <button onclick="retornaCor(1)" class="cores" id="azul"></button>
+                <button onclick="retornaCor(2)" class="cores" id="amarelo"></button>
+                <button onclick="retornaCor(3)" class="cores" id="vermelho"></button>
+                <button onclick="retornaCor(4)" class="cores" id="verde"></button>
             </div>
             <div id="clickViewDiv" class="col-6 offset-3 row-1">
-                <div class="clickView" id="view1" onclick="removeColor(1)"></div>
-                <div class="clickView" id="view2" onclick="removeColor(2)"></div>
-                <div class="clickView" id="view3" onclick="removeColor(3)"></div>
-                <div class="clickView" id="view4" onclick="removeColor(4)"></div>
+                <div class="clickView" id="view1" onclick="removeColor(0)"></div>
+                <div class="clickView" id="view2" onclick="removeColor(1)"></div>
+                <div class="clickView" id="view3" onclick="removeColor(2)"></div>
+                <div class="clickView" id="view4" onclick="removeColor(3)"></div>
             </div>
         </div>
     </div>
@@ -151,24 +152,18 @@
 
         guiaCores.style.visibility = "hidden"
 
-    }, 3000);
+    }, 300000);
 
     var view1 = document.getElementById("view1");
     var view2 = document.getElementById("view2");
     var view3 = document.getElementById("view3");
     var view4 = document.getElementById("view4");
-    var views = document.getElementsByClassName("clickView");
 
     var respostaCores = []
 
-    function removeColor(param) {
-        var view = document.getElementById(`view${param}`);
-        console.log(respostaCores, "antes do splice()");
-        respostaCores.splice(param - 1, 1);
-        console.log(respostaCores, "depois do splice()");
+    function removeColor(index) {
+        respostaCores.splice(index, 1);
         atualizaViews();
-        console.log(respostaCores, "depois do atualizaViews()");
-        
     };
 
     function limpaRespostaCores() {
@@ -180,11 +175,59 @@
     }
 
     function atualizaViews() {
-        view1.style.backgroundColor = respostaCores[0];
-        view2.style.backgroundColor = respostaCores[1];
-        view3.style.backgroundColor = respostaCores[2];
-        view4.style.backgroundColor = respostaCores[3];
+        if (respostaCores[0]) {
+            view1.style.backgroundColor = respostaCores[0];
+        } else {
+            view1.style.backgroundColor = "transparent"
+        }
+
+        if (respostaCores[1]) {
+            view2.style.backgroundColor = respostaCores[1];
+        } else {
+            view2.style.backgroundColor = "transparent"
+        }
+
+        if (respostaCores[2]) {
+            view3.style.backgroundColor = respostaCores[2];
+        } else {
+            view3.style.backgroundColor = "transparent"
+        }
+
+        if (respostaCores[3]) {
+            view4.style.backgroundColor = respostaCores[3];
+        } else {
+            view4.style.backgroundColor = "transparent"
+        }
     }
+
+    function atualizaCorGuia() {
+        if (respostaCores[0]) {
+            var verde = document.getElementById('verdeS').style.color = respostaCores[0];
+        }
+
+        if (respostaCores[1]) {
+            var azul = document.getElementById('azulS').style.color = respostaCores[1];
+        }
+
+        if (respostaCores[2]) {
+            var vermelho = document.getElementById('vermelhoS').style.color = respostaCores[2];
+        }
+
+        if (respostaCores[3]) {
+            var amarelo = document.getElementById('amareloS').style.color = respostaCores[3];
+        }
+    }
+
+    function shuffleArray(array) {
+        for (let a = array.length - 1; a > 0; a--) {
+            const b = Math.floor(Math.random() * (a + 1));
+            [array[a], array[b]] = [array[b], array[a]];
+        }
+        return array;
+    }
+
+    var contCorreto = 0
+    var positionColors = ["#ff0000", "#00ff00", "#ffff00", "#0000ff"];
 
     function adicionaResposta(cor) {
         if (respostaCores.length <= 3) {
@@ -193,7 +236,24 @@
         }
 
         if (respostaCores.length == 4) {
-            enviarResposta();
+            if (JSON.stringify(respostaCores) == JSON.stringify(resposta)) {
+                contCorreto++
+                var resposta = []
+                resposta = shuffleArray(positionColors)
+                console.log(resposta)
+                atualizaCorGuia()
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '[ERROR]',
+                    text: `A resposta está errada!`,
+                    background: '#383838',
+                    color: '#E2E2E2',
+                    confirmButtonColor: '#313131',
+                })
+            }
+            enviarResposta()
+            limpaRespostaCores()
         }
     }
 
@@ -212,11 +272,13 @@
         }
     }
 
+    var positionColors = shuffleArray(["#ff0000", "#00ff00", "#0000ff", "#ffff00"]);
+    console.log(respostaCores)
+    console.log(positionColors)
+
     function enviarResposta() {
 
-        console.log(respostaCores === ["#ff0000", "#0000ff", "#0000ff", "#0000ff"]);
-        debugger
-        if (JSON.stringify(respostaCores) == JSON.stringify(["#ff0000", "#00ff00", "#00ff00", "#0000ff"])) {
+        if (contCorreto == 3) {
 
             var url = window.location.href;
 
@@ -228,24 +290,9 @@
 
             window.location.href = proximaUrl + '/pagina4.html';
 
-        } else {
-
-
-
-            Swal.fire({
-                icon: 'error',
-                title: '[ERROR]',
-                text: `A resposta está errada!`,
-                background: '#383838',
-                color: '#E2E2E2',
-                confirmButtonColor: '#313131',
-            })
-
+            limpaRespostaCores();
         }
-
-        limpaRespostaCores();
     }
-
 
     document.addEventListener('keypress', function (evento) {
 
