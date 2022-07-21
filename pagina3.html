@@ -117,8 +117,7 @@
                 <span id="verdeS">verde</span>,
                 <span id="azulS">azul</span>,
                 <span id="vermelhoS">vermelho</span>,
-                <span id="amareloS">amarelo</span><br> faz o seguinte: <br>da um jeito de fazer a cor aparecer antes de acertar a sequencia, pq se nao o cliente n vai ter a minima ideia de qual clicar, tem q teruma dica pelo menos  ne vei >:(
-
+                <span id="amareloS">amarelo</span>
             </h2>
         </div>
         <div id="dica">
@@ -146,13 +145,18 @@
 </html>
 
 <script>
+    var guiaCores = document.getElementById("pergunta");
 
-    setTimeout(function () {
-        var guiaCores = document.getElementById("pergunta");
+    function timerGuia(time) {
+        guiaCores.style.visibility = "visible"
+        setTimeout(function () {
 
-        guiaCores.style.visibility = "hidden"
+            guiaCores.style.visibility = "hidden"
 
-    }, 3000);
+        }, time);
+    }
+    timerGuia(3000)
+
 
     var view1 = document.getElementById("view1");
     var view2 = document.getElementById("view2");
@@ -201,20 +205,20 @@
     }
 
     function atualizaCorGuia() {
-        if (respostaCores[0]) {
-            var verde = document.getElementById('verdeS').style.color = respostaCores[0];
+        if (resposta[0]) {
+            var verde = document.getElementById('verdeS').style.color = resposta[0];
         }
 
-        if (respostaCores[1]) {
-            var azul = document.getElementById('azulS').style.color = respostaCores[1];
+        if (resposta[1]) {
+            var azul = document.getElementById('azulS').style.color = resposta[1];
         }
 
-        if (respostaCores[2]) {
-            var vermelho = document.getElementById('vermelhoS').style.color = respostaCores[2];
+        if (resposta[2]) {
+            var vermelho = document.getElementById('vermelhoS').style.color = resposta[2];
         }
 
-        if (respostaCores[3]) {
-            var amarelo = document.getElementById('amareloS').style.color = respostaCores[3];
+        if (resposta[3]) {
+            var amarelo = document.getElementById('amareloS').style.color = resposta[3];
         }
     }
 
@@ -227,7 +231,12 @@
     }
 
     var contCorreto = 0
+    var contErrado = 0
     var positionColors = ["#ff0000", "#00ff00", "#ffff00", "#0000ff"];
+
+    var resposta = []
+    resposta = shuffleArray(positionColors)
+    atualizaCorGuia()
 
     function adicionaResposta(cor) {
         if (respostaCores.length <= 3) {
@@ -238,11 +247,16 @@
         if (respostaCores.length == 4) {
             if (JSON.stringify(respostaCores) == JSON.stringify(resposta)) {
                 contCorreto++
-                var resposta = []
                 resposta = shuffleArray(positionColors)
-                console.log(resposta)
+                timerGuia(3000)
                 atualizaCorGuia()
             } else {
+                contErrado++
+                if (contErrado == 3) {
+                    contErrado = 0
+                    contCorreto = 0
+                    resposta = shuffleArray(resposta)
+                }
                 Swal.fire({
                     icon: 'error',
                     title: '[ERROR]',
@@ -251,6 +265,12 @@
                     color: '#E2E2E2',
                     confirmButtonColor: '#313131',
                 })
+
+                var interval = setInterval(function () {
+                    timerGuia(1000)
+                    clearInterval(interval)
+                }, 1000)
+
             }
             enviarResposta()
             limpaRespostaCores()
@@ -273,8 +293,6 @@
     }
 
     var positionColors = shuffleArray(["#ff0000", "#00ff00", "#0000ff", "#ffff00"]);
-    console.log(respostaCores)
-    console.log(positionColors)
 
     function enviarResposta() {
 
