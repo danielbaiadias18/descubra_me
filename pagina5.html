@@ -21,93 +21,61 @@
             <div id="fundo">
                 <div id="contas">
                     <div id="blur">Click in start <br> to view</div>
-                    <div
-                    >
+                    <div>
                         <p id="i1"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     <div>
                         <p id="i2"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     <div>
                         <p id="i3"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     <div>
                         <p id="i4"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     <div>
                         <p id="i5"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     <div>
                         <p id="i6"></p>
-                        <input 
-                            type="number" 
-                            onclick="submit()"  
+                        <input type="number" onclick="submit()"
                             oninput="javascript: 
-                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);"
-                            type="number" 
-                            maxlength="2" 
-                            class="input"
-                        >
+                            if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
+                            class="input">
                     </div>
                     </ul>
                     <button id="submit" onclick="submit()">submit</button>
 
                 </div>
                 <div id="cronometro">
-                    so falta conferir se as respostas estao certas e fazer o botao funcionar csaso esteja tudo certo
+
 
                     <div id="contador">
-                        <p id="cron">00:00:000</p>
+                        <p id="cron">40:00</p>
                     </div>
 
                     <div id="botoes">
                         <button id="botaoStart" onclick="start()">start</button>
-                        <button id="botaoStop" onclick="stop()">stop</button>
                         <button id="botaoReset" onclick="reset()">reset</button>
                     </div>
                 </div>
@@ -141,7 +109,6 @@
 
 <script>
     contas()
-
     function contas() {
         for (var num = 1; num <= 6; num++) {
 
@@ -169,30 +136,23 @@
 
     }
 
-    var seconds = 0;
-    var minutes = 0;
+    var seconds = 40;
     var milliseconds = 0;
 
     var interval
 
-    function extraZero(param) {
-        return param < 10 ? `0${param}` : param
+    function extraZero(num) {
+        return num < 10 ? `0${num}` : num
     }
 
-    function extraZero2(param) {
-        if (param < 10) {
-            return `00${param}`
-        } else if (param < 100) {
-            return `0${param}`
-        } else {
-            return param
-        }
+    function tiraZero(numComZero) {
+        return numComZero - 1
     }
 
     var btnStart = document.getElementById('botaoStart');
-    var btnStop = document.getElementById('botaoStop');
+    var btnReset = document.getElementById('botaoReset');
 
-    var troca = true;
+    // var troca = true;
 
     var blur = document.getElementById("blur");
 
@@ -201,12 +161,11 @@
         blur.style.animationFillMode = "forwards"
         blur.innerText = ""
 
-        timer()
         clearInterval(interval)
         interval = setInterval(timer, 10)
 
         btnStart.style.display = 'none'
-        btnStop.style.display = 'block'
+        btnReset.style.display = 'block'
     }
 
     // if (troca === true) {
@@ -225,54 +184,21 @@
     //     })
     // }
 
-    function stop() {
-        clearInterval(interval)
-
-        blur.style.animation = ""
-        blur.innerHTML = "Click in start <br> to view"
-
-        btnStart.style.display = 'block'
-        btnStop.style.display = 'none'
-    }
-
-    // if (troca === true) {
-    //     document.addEventListener('keypress', function (evento) {
-
-    //         if (evento.keyCade === 32) {
-
-    //             const botaoSpace = document.querySelector('#botaoStop');
-
-    //             botaoSpace.click();
-
-    //             function stop() { }
-
-    //             troca = true;
-    //         }
-    //     })
-    // }
-    var input = document.getElementsByClassName('input')
-
-    function limpaInput() {
-        input.value = ""
-    }
-
     function reset() {
         contas()
 
         blur.style.animation = ""
         blur.innerHTML = "Click in start <br> to view"
-        limpaInput()
 
         btnStart.style.display = 'block'
-        btnStop.style.display = 'none'
+        btnReset.style.display = 'none'
 
         clearInterval(interval)
 
-        seconds = 0
-        minutes = 0
-        milliseconds = 0
+        seconds = 40
+        milliseconds = 00
 
-        document.getElementById('cron').innerText = `00:00:000`
+        document.getElementById('cron').innerText = `40:00`
     }
 
     // document.addEventListener('keypress', function (evento) {
@@ -289,16 +215,9 @@
     // })
 
     function timer() {
-        if ((milliseconds += 10) == 1000) {
-            milliseconds = 0;
-            seconds++;
-        }
-        if (seconds == 60) {
-            seconds = 0;
-            minutes++;
-        }
-
-        if (minutes == 04 && seconds == 00 && milliseconds == 000) {
+        console.log(milliseconds)
+        console.log(seconds)
+        if (milliseconds == 0 && seconds == 0) {
             reset()
 
             Swal.fire({
@@ -320,7 +239,22 @@
             })
 
         }
-        document.getElementById('cron').innerText = `${extraZero(minutes)}:${extraZero(seconds)}:${extraZero2(milliseconds)}`
+
+        if (seconds == 40) {
+            seconds--
+            milliseconds = 100
+        }
+
+        if (milliseconds > 0) {
+            milliseconds -= 1
+        }
+
+        if (milliseconds == 1) {
+            seconds--;
+            milliseconds = 100
+        }
+
+        document.getElementById('cron').innerText = `${extraZero(seconds)}:${extraZero(tiraZero(milliseconds))}`
     }
 
 

@@ -107,6 +107,31 @@
             display: inline-flex;
             border-collapse: collapse;
         }
+
+        #niveis {
+            position: absolute;
+            left: 50%;
+            bottom: 15%;
+            width: 170px;
+            height: 95px;
+            background-color: gray;
+            transform: translate(-50%);
+            border: 8px double rgb(200, 200, 200);
+            box-sizing: content-box;
+            color: rgb(255, 255, 255);
+            border-top-color:rgb(57, 57, 255);
+            border-right-color: rgb(255, 255, 86);
+            border-bottom-color: rgb(255, 88, 88);
+            border-left-color:  rgb(73, 255, 73);
+        }
+
+        #niveis>h2 {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 2.2em;
+            margin: 0;
+            color: rgb(201, 201, 201);
+        }
     </style>
 
 <body>
@@ -133,6 +158,10 @@
                 <div class="clickView" id="view3" onclick="removeColor(2)"></div>
                 <div class="clickView" id="view4" onclick="removeColor(3)"></div>
             </div>
+            <div id="niveis">
+                <h2>Nível</h2>
+                <div id="numNivel"></div>
+            </div>
         </div>
     </div>
     </div>
@@ -156,7 +185,6 @@
         }, time);
     }
     timerGuia(3000)
-
 
     var view1 = document.getElementById("view1");
     var view2 = document.getElementById("view2");
@@ -232,11 +260,14 @@
 
     var contCorreto = 0
     var contErrado = 0
+    var numNivel = 1
     var positionColors = ["#ff0000", "#00ff00", "#ffff00", "#0000ff"];
 
     var resposta = []
     resposta = shuffleArray(positionColors)
     atualizaCorGuia()
+
+    var nivel = document.getElementById('numNivel');
 
     function adicionaResposta(cor) {
         if (respostaCores.length <= 3) {
@@ -246,6 +277,10 @@
 
         if (respostaCores.length == 4) {
             if (JSON.stringify(respostaCores) == JSON.stringify(resposta)) {
+                numNivel++
+                if (numNivel == 4) {
+                    numNivel--
+                }
                 contCorreto++
                 resposta = shuffleArray(positionColors)
                 timerGuia(3000)
@@ -256,6 +291,7 @@
                     contErrado = 0
                     contCorreto = 0
                     resposta = shuffleArray(resposta)
+                    numNivel = 1
                 }
                 Swal.fire({
                     icon: 'error',
@@ -275,7 +311,10 @@
             enviarResposta()
             limpaRespostaCores()
         }
+        // Precisa dos dois "nivel.innerHTML" porque nao funciona so com um.. nao sei o porque ;-;
+        nivel.innerHTML = `<h1>${numNivel}</h1>`
     }
+    nivel.innerHTML = `<h1>${numNivel}</h1>`
 
     function retornaCor(idCor) {
         switch (idCor) {

@@ -128,33 +128,42 @@ input::-webkit-inner-spin-button {
 }
 
 #contador {
+    width: 230px;
     text-align: center;
     font-family: 'Courier New', Courier;
-    padding-top: 35px;
+    border: 3px solid #047bbb80;
+    padding: 4px 0px;
+    border-left: none;
+    border-right: none;
+    margin: auto;
+    margin-top: 25px;
 }
 
 #cron {
-    font-size: 2.7em;
-    margin: 0px 10px;
-    border-radius: 5px;
-
+    width: 222px;
+    font-size: 3.3em;
+    border: 3px solid #2f9cd780;
+    border-left: none;
+    border-right: none;
+    margin: auto;
+    background-image: linear-gradient(to right, transparent ,#00a6ff65 , #008ad4a9 40% 60%, #00a6ff65 , transparent );
+    
 }
 
 #botoes {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 #botaoStart,
-#botaoStop,
 #botaoReset {
-    width: 115px;
+    width: 230px;
     height: 60px;
     padding-top: 5px;
     color: white;
-    font-size: 1.5em;
+    font-size: 2em;
     font-family: Courier;
     font-weight: bold;
     transition-duration: .5s;
@@ -163,7 +172,6 @@ input::-webkit-inner-spin-button {
 
 #botaoStart {
     display: block;
-    margin-right: 5px;
     border: 2px solid green;
     color: rgb(132, 237, 132);
     background-color: green;
@@ -174,24 +182,11 @@ input::-webkit-inner-spin-button {
     background-color: rgba(0, 255, 0, 0.336);
 }
 
-#botaoStop {
-    background-color: gray;
-    display: none;
-    margin-right: 5px;
-    color: rgb(216, 216, 216);
-    border: 2px solid gray;
-}
-
-#botaoStop:hover {
-    color: gray;
-    background-color: rgba(176, 176, 176, 0.574);
-}
-
 #botaoReset {
     background-color: #e80000;
     border: 2px solid #e80000;
-    margin-left: 5px;
     color: rgb(255, 171, 171);
+    display: none;
 }
 
 #botaoReset:hover {
