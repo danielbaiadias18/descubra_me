@@ -23,48 +23,51 @@
                     <div id="blur">Click in start <br> to view</div>
                     <div>
                         <p id="i1"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input1"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     <div>
                         <p id="i2"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input2"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     <div>
                         <p id="i3"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input3"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     <div>
                         <p id="i4"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input4"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     <div>
                         <p id="i5"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input5"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     <div>
                         <p id="i6"></p>
-                        <input type="number" onclick="submit()"
+                        <input type="number" id="input6"
                             oninput="javascript: 
                             if (this.value.length > this.maxLength) this.value = this.  value.slice(0, this.maxLength);" type="number" maxlength="2"
                             class="input">
                     </div>
                     </ul>
-                    <button id="submit" onclick="submit()">submit</button>
+                    <button id="submit" onclick="submit()">submit
+                    </button>
+                    <span id="atalhoBotao">Enter</span>
+
 
                 </div>
                 <div id="cronometro">
@@ -108,45 +111,137 @@
 </html>
 
 <script>
-    contas()
-    function contas() {
-        for (var num = 1; num <= 6; num++) {
+    var certo = 0
+    var errado = 0
+    var respostas = []
+    var resultados = []
+    for (var num = 1; num <= 6; num++) {
+        var input = document.getElementById(`input${num}`).value
 
-            var randomN1 = Math.floor((Math.random() * 9) + 1)
-            var randomN2 = Math.floor((Math.random() * 9) + 1)
-            var li = document.getElementById(`i${num}`)
-            var conta = `${randomN1} x ${randomN2} =`
-            function returnResult() {
-                var result = randomN1 * randomN2
-                return btnStop.innerText = result
+        respostas.push(input)
+        var randomN1 = Math.floor((Math.random() * 9) + 1)
+        var randomN2 = Math.floor((Math.random() * 9) + 1)
+        resultados.push(randomN1 * randomN2)
+        var li = document.getElementById(`i${num}`)
+        var conta = `${randomN1} x ${randomN2} =`
+
+        li.innerText = conta
+    }
+
+    function certOuNao() {
+        for (var num = 0; num <= 5; num++) {
+
+            if (respostas[num] == resultados[num]) {
+                certo++
+            } else {
+                errado++
             }
+            debugger
+            if (certo == 6) {
+                var confirm = document.getElementById('confirmacao');
 
-            li.innerText = conta
+                    confirm.style.display = "block"
+                    confirm.style.display = "flex"
+                    confirm.style.alignItems = "center"
+                setTimeout(function () {
+                    enviarResposta()
+                }, 3000)
+            }
+        }
+    }
+
+    function limpaInput() {
+        for (var num = 1; num <= 6; num++) {
+            var input = document.getElementById(`input${num}`).value = ""
         }
     }
 
     function submit() {
 
-        var confirm = document.getElementById('confirmacao');
+        respostas.splice(0, 6)
+        for (var num = 1; num <= 6; num++) {
+            var input = document.getElementById(`input${num}`).value
+            respostas.push(input)
+        }
+        var clicadoOuNao = false
 
+        if (!clicadoOuNao) {
+            certOuNao()
+            clicadoOuNao = true
+        }
 
-        confirm.style.display = "block"
-        confirm.style.display = "flex"
-        confirm.style.alignItems = "center"
+        if (errado >= 2 && errado <= 5) {
+            Swal.fire({
+                allowEnterKey: false,
+                toast: true,
+                icon: 'warning',
+                title: `<h4>Você errou ${errado} contas</h4>`,
+                timer: 2000,
+                timerProgressBar: true,
+                color: '#ffc282',
+                position: 'top-end',
+                showConfirmButton: false,
+                background: '#383838',
+                confirmButtonColor: '#313131',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            errado = 0
+        }
+
+        if (errado == 1) {
+            Swal.fire({
+                allowEnterKey: false,
+                toast: true,
+                icon: 'warning',
+                title: `<h4>Você errou ${errado} conta</h4>`,
+                timer: 2000,
+                timerProgressBar: true,
+                color: '#ffc282',
+                position: 'top-end',
+                showConfirmButton: false,
+                background: '#383838',
+                confirmButtonColor: '#313131',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            errado = 0;
+        }
+
+        for (var num = 1; num <= 6; num++) {
+
+            randomN1 = Math.floor((Math.random() * 9) + 1)
+            randomN2 = Math.floor((Math.random() * 9) + 1)
+            li = document.getElementById(`i${num}`)
+            conta = `${randomN1} x ${randomN2} =`
+
+            li.innerText = conta
+        }
+
+        blur.style.animation = ""
+        blur.innerHTML = "Click in start <br> to view"
+
+        btnStart.style.display = 'block'
+        btnReset.style.display = 'none'
+
+        clearInterval(interval)
+        limpaInput()
+
 
     }
 
     var seconds = 40;
+    var seconds2 = seconds
     var milliseconds = 0;
 
     var interval
 
     function extraZero(num) {
         return num < 10 ? `0${num}` : num
-    }
-
-    function tiraZero(numComZero) {
-        return numComZero - 1
     }
 
     var btnStart = document.getElementById('botaoStart');
@@ -185,7 +280,18 @@
     // }
 
     function reset() {
-        contas()
+
+        for (var num = 1; num <= 6; num++) {
+
+            randomN1 = Math.floor((Math.random() * 9) + 1)
+            randomN2 = Math.floor((Math.random() * 9) + 1)
+            li = document.getElementById(`i${num}`)
+            conta = `${randomN1} x ${randomN2} =`
+
+            li.innerText = conta
+        }
+
+        limpaInput()
 
         blur.style.animation = ""
         blur.innerHTML = "Click in start <br> to view"
@@ -195,7 +301,7 @@
 
         clearInterval(interval)
 
-        seconds = 40
+        seconds = seconds2
         milliseconds = 00
 
         document.getElementById('cron').innerText = `40:00`
@@ -215,10 +321,27 @@
     // })
 
     function timer() {
-        console.log(milliseconds)
-        console.log(seconds)
-        if (milliseconds == 0 && seconds == 0) {
-            reset()
+        //Caso queira mudar os segundos maximos para o timer basta mudar o "seconds2"
+
+        if (seconds == seconds2) {
+            seconds--
+            milliseconds = 100
+        }
+
+        if (milliseconds > -1) {
+            milliseconds -= 1
+        }
+
+        if (milliseconds == -1) {
+            seconds--;
+            milliseconds = 100
+        }
+
+        if (seconds == 0 && milliseconds == 0) {
+            seconds = 00
+            milliseconds = 00
+            clearInterval(interval)
+
 
             Swal.fire({
                 allowEnterKey: false,
@@ -240,73 +363,34 @@
 
         }
 
-        if (seconds == 40) {
-            seconds--
-            milliseconds = 100
-        }
-
-        if (milliseconds > 0) {
-            milliseconds -= 1
-        }
-
-        if (milliseconds == 1) {
-            seconds--;
-            milliseconds = 100
-        }
-
-        document.getElementById('cron').innerText = `${extraZero(seconds)}:${extraZero(tiraZero(milliseconds))}`
+        document.getElementById('cron').innerText = `${extraZero(seconds)}:${extraZero(milliseconds)}`
     }
 
 
 
     function enviarResposta() {
 
-        var resposta = document.getElementById("resposta").value;
-
-        const Alerts = {
-
-            Warning() {
-                Swal.fire({
-                    allowEnterKey: false,
-                    toast: true,
-                    icon: 'warning',
-                    title: '<h5>Preencha o espaço!</h5>',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    color: '#E2E2E2',
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    background: '#383838',
-                    confirmButtonColor: '#313131',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-            },
-
-            Fail() {
-                Swal.fire({
-                    allowEnterKey: false,
-                    toast: true,
-                    icon: 'error',
-                    title: `<h6>A resposta "${resposta}" está errada!</h6>`,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    background: '#383838',
-                    color: '#E2E2E2',
-                    confirmButtonColor: '#313131',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-            },
+        function Fail() {
+            Swal.fire({
+                allowEnterKey: false,
+                toast: true,
+                icon: 'error',
+                title: "<h6>Alguma resposta está errada!</h6>",
+                timer: 2000,
+                timerProgressBar: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                background: '#383838',
+                color: '#E2E2E2',
+                confirmButtonColor: '#313131',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
         }
 
-        if (resposta == '???') {
+        if (certo == 6) {
 
             var url = window.location.href;
 
@@ -318,12 +402,9 @@
 
             window.location.href = proximaUrl + '/pagina6.html';
 
+            certo = 0
         } else {
-            if (resposta.length == 0) {
-                Alerts.Warning()
-            } else {
-                Alerts.Fail()
-            }
+            Fail()
         }
     }
 
@@ -331,11 +412,11 @@
 
         if (evento.key === "Enter") {
 
-            const botaoEnter = document.querySelector('#botaoResposta');
+            const botaoEnter = document.querySelector('#submit');
 
             botaoEnter.click();
 
-            function enviarResposta() { }
+            submit()
 
         }
     })
