@@ -8,14 +8,24 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="New-Piskel.ico" type="image/x-icon">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
-        #dica {
-            color: gray;
-            position: absolute;
-            bottom: 50%;
-            left: 12%;
-            text-align: center;
+
+        .circulo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: gray;
+            margin: 5px;
+            border: 3px solid white;
+            box-sizing: border-box;
+        }
+
+        .circulo:hover {
+            background-color: rgb(103, 103, 103);
         }
 
         footer {
@@ -35,11 +45,57 @@
                 Pergunta Aleatoria
             </h2>
         </div>
-        <div class="container">
-            <div id="dica" class="col-7 offset-1">
-                [- Dica -]
+        <div class="container" id="idCirculos">
+            <div class="row">
+                <div onclick="acende(1)" class="circulo" id="circulo1"></div>
+                <div onclick="acende(2)" class="circulo" id="circulo2"></div>
+                <div onclick="acende(3)" class="circulo" id="circulo3"></div>
+                <div onclick="acende(4)" class="circulo" id="circulo4"></div>
+                <div onclick="acende(5)" class="circulo" id="circulo5"></div>
+                <div onclick="acende(6)" class="circulo" id="circulo6"></div>
+            </div>
+            <div class=" row">
+                <div onclick="acende(7)" class="circulo" id="circulo7"></div>
+                <div onclick="acende(8)" class="circulo" id="circulo8"></div>
+                <div onclick="acende(9)" class="circulo" id="circulo9"></div>
+                <div onclick="acende(10)" class="circulo" id="circulo10"></div>
+                <div onclick="acende(11)" class="circulo" id="circulo11" ]></div>
+                <div onclick="acende(12)" class="circulo" id="circulo12"></div>
+            </div>
+            <div class="row">
+                <div onclick="acende(13)" class="circulo" id="circulo13"></div>
+                <div onclick="acende(14)" class="circulo" id="circulo14"></div>
+                <div onclick="acende(15)" class="circulo" id="circulo15"></div>
+                <div onclick="acende(16)" class="circulo" id="circulo16"></div>
+                <div onclick="acende(17)" class="circulo" id="circulo17"></div>
+                <div onclick="acende(18)" class="circulo" id="circulo18"></div>
+            </div>
+            <div class="row">
+                <div onclick="acende(19)" class="circulo" id="circulo19"></div>
+                <div onclick="acende(20)" class="circulo" id="circulo20"></div>
+                <div onclick="acende(21)" class="circulo" id="circulo21"></div>
+                <div onclick="acende(22)" class="circulo" id="circulo22"></div>
+                <div onclick="acende(23)" class="circulo" id="circulo23"></div>
+                <div onclick="acende(24)" class="circulo" id="circulo24"></div>
+            </div>
+            <div class="row">
+                <div onclick="acende(25)" class="circulo" id="circulo25"></div>
+                <div onclick="acende(26)" class="circulo" id="circulo26"></div>
+                <div onclick="acende(27)" class="circulo" id="circulo27"></div>
+                <div onclick="acende(28)" class="circulo" id="circulo28"></div>
+                <div onclick="acende(29)" class="circulo" id="circulo29"></div>
+                <div onclick="acende(30)" class="circulo" id="circulo30"></div>
+            </div>
+            <div class="row">
+                <div onclick="acende(31)" class="circulo" id="circulo31"></div>
+                <div onclick="acende(32)" class="circulo" id="circulo32"></div>
+                <div onclick="acende(33)" class="circulo" id="circulo33"></div>
+                <div onclick="acende(34)" class="circulo" id="circulo34"></div>
+                <div onclick="acende(35)" class="circulo" id="circulo35"></div>
+                <div onclick="acende(36)" class="circulo" id="circulo36"></div>
             </div>
         </div>
+    </div>
     </div>
     <div id="divResposta">
         <div class="row">
@@ -61,13 +117,26 @@
 </html>
 
 <script>
-    document.getElementById('resposta').focus();
+
+
+    function acende(numeroId) {
+        debugger
+
+        idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+
+        idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "blue";
+
+        idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+        idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+
+    }
 
     function enviarResposta() {
 
         var resposta = document.getElementById("resposta").value;
 
-        if (resposta == '???' || resposta == 'Pato') {
+        if (resposta.value == '???') {
 
             var url = window.location.href;
 
@@ -81,7 +150,7 @@
 
             window.location.href = proximaUrl + '/pagina3.html';
         } else {
-            if (resposta.length == 0) {
+            if (resposta.value.length == 0) {
                 Swal.fire({
                     icon: 'warning',
                     title: '[ERROR]',
