@@ -140,9 +140,9 @@
             if (certo == 6) {
                 var confirm = document.getElementById('confirmacao');
 
-                    confirm.style.display = "block"
-                    confirm.style.display = "flex"
-                    confirm.style.alignItems = "center"
+                confirm.style.display = "block"
+                confirm.style.display = "flex"
+                confirm.style.alignItems = "center"
                 setTimeout(function () {
                     enviarResposta()
                 }, 3000)
@@ -182,13 +182,14 @@
                 position: 'top-end',
                 showConfirmButton: false,
                 background: '#383838',
-                confirmButtonColor: '#313131',
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
             errado = 0
+        } else {
+
         }
 
         if (errado == 1) {
@@ -203,13 +204,31 @@
                 position: 'top-end',
                 showConfirmButton: false,
                 background: '#383838',
-                confirmButtonColor: '#313131',
                 didOpen: (toast) => {
                     toast.addEventListener('mouseenter', Swal.stopTimer)
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
             errado = 0;
+        } 
+
+        if (errado == 6) {
+            Swal.fire({
+                allowEnterKey: false,
+                toast: true,
+                icon: 'warning',
+                title: `<h4>Você errou todas as contas</h4>`,
+                timer: 2000,
+                timerProgressBar: true,
+                color: '#ffc282',
+                position: 'top-end',
+                showConfirmButton: false,
+                background: '#383838',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
         }
 
         for (var num = 1; num <= 6; num++) {

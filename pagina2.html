@@ -123,8 +123,123 @@
 
     function acende(numeroId) {
         debugger
-        if (numeroId <= 30) {
-            
+
+        for (var num = 1; num <= 36; num++) {
+            debugger
+            var circulo = document.getElementById(`circulo${num}`)
+            circulos = []
+            circulos.push(circulo)
+            circulos[num] = false
+            console.log(circulos[num])
+            if (circulo.style.backgroundColor == "yellow") {
+                circulos[num] = true
+                console.log(circulos[num])
+            }
+        }
+
+        //=======================================================//
+        //--------------------  Q U I N A S  --------------------//
+
+
+        if (numeroId == 1) {
+            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
+
+        }
+
+        if (numeroId == 6) {
+            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
+
+        }
+
+        if (numeroId == 31) {
+            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+
+        }
+
+        if (numeroId == 36) {
+            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+
+        }
+
+        //--------------------  Q U I N A S  --------------------//
+        //=======================================================//
+
+        //=======================================================//
+        //--------------------  B O R D A S  --------------------//
+
+        if (numeroId == 7 ||
+            numeroId == 13 ||
+            numeroId == 19 ||
+            numeroId == 25) {
+
+            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
+        }
+
+        if (numeroId == 12 ||
+            numeroId == 18 ||
+            numeroId == 24 ||
+            numeroId == 30) {
+
+            idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+        }
+
+        if (numeroId == 32 ||
+            numeroId == 33 ||
+            numeroId == 34 ||
+            numeroId == 35) {
+
+            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+        }
+
+        if (numeroId == 2 ||
+            numeroId == 3 ||
+            numeroId == 4 ||
+            numeroId == 5) {
+
+            idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
+
+            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
+        }
+
+        //--------------------  B O R D A S  --------------------//
+        //=======================================================//
+
+        //=======================================================//
+        //--------------------  C E N T R O  --------------------//
+
+        if (
+            numeroId == 8  || numeroId == 9  ||
+            numeroId == 10 || numeroId == 11 ||
+            numeroId == 14 || numeroId == 15 ||
+            numeroId == 16 || numeroId == 17 ||
+            numeroId == 20 || numeroId == 21 ||
+            numeroId == 22 || numeroId == 23 ||
+            numeroId == 26 || numeroId == 27 ||
+            numeroId == 28 || numeroId == 29
+         ) {
+
             idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
 
             idCirculo = document.getElementById(`circulo${numeroId + 6}`).style.backgroundColor = "yellow";
@@ -132,16 +247,11 @@
             idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
 
             idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
-
-        } else {
-
-            idCirculo = document.getElementById(`circulo${numeroId - 1}`).style.backgroundColor = "yellow";
-
-            idCirculo = document.getElementById(`circulo${numeroId - 6}`).style.backgroundColor = "yellow";
-
-            idCirculo = document.getElementById(`circulo${numeroId + 1}`).style.backgroundColor = "yellow";
-            
         }
+
+        //--------------------  C E N T R O  --------------------//
+        //=======================================================//
+
     }
 
     function enviarResposta() {

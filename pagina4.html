@@ -11,15 +11,53 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        #dica {
-            color: gray;
-            position: absolute;
-            bottom: 50%;
-            left: 12%;
-            text-align: center;
+        body {
+            background-color: rgba(94, 94, 94, 0.603) !important;
+            width: 100vw;
+            height: 100vh;
         }
 
-        footer{
+        .container_2 {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #inicio {
+            background-color: rgba(211, 211, 211, 0.507);
+            width: 90vw;
+            height: 90vh;
+        }
+
+        #jogo {
+            width: 90vw;
+            height: 90vh;
+            display: none;
+            margin: auto;
+        }
+
+        .pode {
+            background-color: rgba(255, 255, 255, 0.856);
+            width: 100px;
+            height: 100px;
+        }
+
+        .naoPode {
+            background-color: rgba(60, 60, 60, 0.795);
+            width: 90vw;
+            height: 90vh;
+        }
+
+        #circuloInicio {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: yellow;
+        }
+
+        footer {
             color: rgb(45, 45, 45);
             position: absolute;
             bottom: 5px;
@@ -29,30 +67,24 @@
     <title>Descubra-me</title>
 </head>
 
-<body>
-    <div id="divPergunta">
-        <div id="pergunta" class="col-8 offset-2 text-center mt-5">
-            <h2 style="color: white;">
-                Pergunta Aleatoria
-            </h2>
-        </div>
-        <div class="container">
-            <div id="dica" class="col-7 offset-1">
-                [- Dica -]
+<body class="container_2">
+
+
+    <div id="inicio">
+        <div id="circuloInicio" onmouseover="carregaJogo()">Sempre q passar o mouse por cima de um elemento com a classe "pode", ele nao da refresh na pagina</div>
+    </div>
+
+    <div id="jogo">
+        <div id="naopode" class="naoPode">
+            <div onmouseout="errou()" id="pode" class="pode">
+
+            </div>
+            <div id="pode" class="pode">
+
             </div>
         </div>
     </div>
-    <div id="divResposta">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <input type="text" name="resposta" id="resposta" maxlength="100"
-                    placeholder="Escreva sua resposta aqui">
-            </div>
-            <div class="col-1" style="padding-left: 0;">
-                <button id="botaoResposta" onclick="enviarResposta()"><span style="width: 100%;">></span></button>
-            </div>
-        </div>
-    </div>
+
     <footer>
         4
     </footer>
@@ -62,13 +94,33 @@
 </html>
 
 <script>
-    document.getElementById('resposta').focus();
+    function errou(id) {
+        debugger
+        var id =
+            console.log(id)
+        var elemento = document.getElementsByClassName(id);
+        if (elemento) {
+            document.location.reload();
+        }
+    }
+
+    function carregaJogo() {
+        debugger
+        var inicio = document.getElementById('inicio');
+        var jogo = document.getElementById('jogo');
+        inicio.style.display = 'none'
+        jogo.style.display = 'block'
+        jogo.classList.add("container_2")
+    }
+
+    function guia() {
+        var pode = document.getElementById('pode');
+        pode.style.backgroundColor = 'red'
+    }
 
     function enviarResposta() {
 
-        var resposta = document.getElementById("resposta").value;
-
-        if (resposta == '???' || resposta == 'Pato') {
+        if (resposta == '???') {
 
             var url = window.location.href;
 
