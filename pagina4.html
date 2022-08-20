@@ -29,13 +29,10 @@
         #jogo {
             width: 80vmin;
             height: 80vmin;
-            margin: auto;
 
             background-color: hsl(0, 0%, 14%);
 
             display: none;
-            grid-template-rows: repeat(15, auto);
-            grid-template-columns: repeat(15, auto);
         }
 
         .pode {
@@ -46,14 +43,18 @@
 
         #naopode {
             background-color: rgba(60, 60, 60, 0.795);
-            width: 90vw;
-            height: 90vh;
+            width: 80vmin;
+            height: 80vmin;
+
+            margin: auto;
+
+            grid-template-rows: repeat(15, auto);
+            grid-template-columns: repeat(15, auto);
         }
 
-        #circuloInicio {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+        #guiaInicio {
+            width: 75px;
+            height: 75px;
             background-color: yellow;
         }
 
@@ -70,15 +71,11 @@
 <body>
 
     <div id="inicio">
-        <div id="circuloInicio" onmouseover="carregaJogo()"></div>
+        <div id="guiaInicio" onmouseover="carregaJogo()"></div>
     </div>
 
     <div id="jogo">
-        <!-- <div id="naopode">
-            <div id="pode" class="pode">
 
-            </div>
-        </div> -->
     </div>
 
     <footer>
@@ -90,6 +87,7 @@
 </html>
 
 <script>
+
     function errou(id) {
         document.location.reload();
     }
@@ -97,23 +95,14 @@
     var jogo = document.getElementById('jogo');
     var inicio = document.getElementById('inicio');
 
-    pode.addEventListener("mouseover", function (e) {
-        e.stopPropagation()
-        console.log("pode")
-    })
-
-    naopode.addEventListener("mouseover", function () {
-        document.location.reload();
-    })
-
     function carregaJogo() {
         jogo.style.display = 'grid'
         inicio.style.display = 'none'
         jogo.classList.add("container_2")
         adicionaPixel(1, 1)
-        adicionaPixel(2, 2)
-        adicionaPixel(2, 1)
         adicionaPixel(1, 2)
+        adicionaPixel(2, 1)
+        adicionaPixel(2, 2)
         adicionaPixel(1, 3)
         adicionaPixel(1, 4)
         adicionaPixel(1, 5)
@@ -163,62 +152,59 @@
         adicionaPixel(13, 12)
         adicionaPixel(13, 13)
         adicionaPixel(13, 14)
-        adicionaPixel(14, 14)
-        adicionaPixel(14, 15)
-        adicionaPixel(15, 15)
-        adicionaPixel(15, 14)
+        adicionaPixelFinal(14, 15)
+        adicionaPixelFinal(14, 14)
+        adicionaPixelFinal(15, 15)
+        adicionaPixelFinal(15, 15)
     }
+
+    var pode = document.getElementById("pode")
+
+    jogo.addEventListener("mouseover", function () {
+        document.location.reload();
+        console.log("jogo")
+
+    })
 
     function adicionaPixel(x, y) {
         var pixel1 = document.createElement("div");
-        pixel1.style.gridColumnStart = x
-        pixel1.style.gridRowStart = y
-        pixel1.style.backgroundColor = "White"
-        jogo.appendChild(pixel1)
+        pixel1.id = "pode";
+        pixel1.addEventListener("mouseover", function (e) {
+            e.stopPropagation()
+            console.log("pode")
+        })
+        pixel1.style.gridColumnStart = x;
+        pixel1.style.gridRowStart = y;
+        pixel1.style.backgroundColor = "White";
+        jogo.appendChild(pixel1);
     }
 
-    // function guia() {
-    //     var pode = document.getElementById('pode');
-    //     pode.style.backgroundColor = 'red'
-    // }
+    function adicionaPixelFinal(x, y) {
+        var pixel2 = document.createElement("div");
+        pixel2.id = "pode";
+        pixel2.addEventListener("mouseover", function (e) {
+            e.stopPropagation()
+            
+        })
+        pixel2.style.gridColumnStart = x;
+        pixel2.style.gridRowStart = y;
+        pixel2.style.backgroundColor = "rgba(4, 255, 4, 0.263)";
+        jogo.appendChild(pixel2);
+    }
 
     function enviarResposta() {
 
-        if (resposta == '???') {
+        var url = window.location.href;
 
-            var url = window.location.href;
+        var proximaUrl = url.split('/');
 
-            var proximaUrl = url.split('/');
+        proximaUrl.pop();
 
-            proximaUrl.pop();
+        proximaUrl = proximaUrl.join('/');
 
-            proximaUrl = proximaUrl.join('/');
+        console.log("proximaUrl", proximaUrl)
 
-            console.log("proximaUrl", proximaUrl)
-
-            window.location.href = proximaUrl + '/pagina5.html';
-        } else {
-            if (resposta.length == 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '[ERROR]',
-                    text: 'Preencha o espaço!',
-                    background: '#383838',
-                    color: '#E2E2E2',
-                    confirmButtonColor: '#313131',
-                })
-            } else {
-
-                Swal.fire({
-                    icon: 'error',
-                    title: '[ERROR]',
-                    text: `A resposta "${resposta}" está errada!`,
-                    background: '#383838',
-                    color: '#E2E2E2',
-                    confirmButtonColor: '#313131',
-                })
-            }
-        }
+        window.location.href = proximaUrl + '/pagina5.html';
     }
 
     document.addEventListener('keypress', function (evento) {
