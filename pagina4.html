@@ -26,9 +26,21 @@
             height: 80vmin;
             border: 20px solid hsla(0, 0%, 31%, 0.649);
             box-sizing: content-box;
+            display: inline-flex;
         }
 
-        #jogo {
+        #jogo1 {
+            width: 80vmin;
+            height: 80vmin;
+
+            background-color: hsl(0, 0%, 14%);
+
+            display: none;
+            border: 20px solid hsla(0, 0%, 31%, 0.649);
+            box-sizing: content-box;
+        }
+
+        #jogo2 {
             width: 80vmin;
             height: 80vmin;
 
@@ -59,13 +71,23 @@
         #guiaInicio {
             width: 75px;
             height: 75px;
-            background-color: yellow;
+            background-color: lightblue;
         }
 
         #avisoMouse {
-            background-color: rgb(199, 199, 199);
-            display: inline-block;
+            font-family: Times, serif;
+            font-weight: bold;
             padding: 10px;
+            display: inline;
+            text-align: justify;
+            color: #93d5ff;
+        }
+
+        #seta {
+            display: inline-flex;
+            font-weight: bold;
+            color: rgb(138, 189, 255);
+            margin: 5px 0px 0px 0px;
         }
 
         footer {
@@ -82,10 +104,13 @@
 
     <div id="inicio">
         <div id="guiaInicio" onmouseover="carregaJogo()"></div>
-        <div><h3 id="avisoMouse"> <h2>⇧</h2> Coloque o mouse <br> aqui para começar</h3></div>
+        <div>
+            <h1 id="seta">⇦</h1>
+            <h3 id="avisoMouse"> Inicie Aqui</h3>
+        </div>
     </div>
 
-    <div id="jogo">
+    <div id="jogo1">
 
     </div>
 
@@ -99,17 +124,24 @@
 
 <script>
 
-    function errou(id) {
-        document.location.reload();
-    }
+    localStorage.setItem("fase", "1")
+    var fase = localStorage.getItem("fase")
 
-    var jogo = document.getElementById('jogo');
+    if (fase == 1) {
+        var jogo1 = document.getElementById('jogo1');
+    }
+    if (fase == 2) {
+        var jogo2 = document.getElementById('jogo2');
+    }
+    if (fase == 3) {
+        var jogo3 = document.getElementById('jogo3');
+    }
     var inicio = document.getElementById('inicio');
 
     function carregaJogo() {
-        jogo.style.display = 'grid'
+        jogo1.style.display = 'grid'
         inicio.style.display = 'none'
-        jogo.classList.add("container_2")
+        jogo1.classList.add("container_2")
         adicionaPixelInicio(1, 1)
         adicionaPixelInicio(1, 2)
         adicionaPixelInicio(2, 1)
@@ -169,17 +201,14 @@
         adicionaPixelFinal(15, 15)
     }
 
-    var pode = document.getElementById("pode")
-
-    jogo.addEventListener("mouseover", function () {
-        document.location.reload();
-        console.log("jogo")
+    jogo1.addEventListener("mouseover", function () {
+        // document.location.reload();
+        console.log("jogo1")
 
     })
 
     function adicionaPixel(x, y) {
         var pixel1 = document.createElement("div");
-        pixel1.id = "pode";
         pixel1.addEventListener("mouseover", function (e) {
             e.stopPropagation()
             console.log("pode")
@@ -187,32 +216,52 @@
         pixel1.style.gridColumnStart = x;
         pixel1.style.gridRowStart = y;
         pixel1.style.backgroundColor = "White";
-        jogo.appendChild(pixel1);
+        jogo1.appendChild(pixel1);
     }
 
     function adicionaPixelFinal(x, y) {
         var pixel2 = document.createElement("div");
-        pixel2.id = "pode";
         pixel2.addEventListener("mouseover", function (e) {
-            e.stopPropagation()
-            enviarResposta()
+            trocaJogo(jogo1, jogo2, "jogo2")
+            e.stopPropagation();
+            // for (var cont1 = 1; cont1 <= 15; cont1++) {
+            //     for (var cont2 = 1; cont2 <= 15; cont2++) {
+            //         
+            //     }
+            // }
         })
         pixel2.style.gridColumnStart = x;
         pixel2.style.gridRowStart = y;
         pixel2.style.backgroundColor = "lightgreen";
-        jogo.appendChild(pixel2);
+        jogo1.appendChild(pixel2);
     }
 
     function adicionaPixelInicio(x, y) {
         var pixel3 = document.createElement("div");
-        pixel3.id = "pode";
         pixel3.addEventListener("mouseover", function (e) {
-            e.stopPropagation()
+            e.stopPropagation();
         })
         pixel3.style.gridColumnStart = x;
         pixel3.style.gridRowStart = y;
         pixel3.style.backgroundColor = "lightblue";
-        jogo.appendChild(pixel3);
+        jogo1.appendChild(pixel3);
+    }
+
+    function trocaJogo(jogo_antigo, jogo_novo, nomeIdjogo) {
+        var fase = localStorage.getItem("fase")
+        fase++
+        jogo_antigo.remove()
+        debugger
+        var jogo_novo = document.createElement("div");
+        jogo_novo.id = nomeIdjogo
+        jogo_novo.style.width = "80vmin"
+        jogo_novo.style.height = "80vmin"
+        jogo_novo.style.backgroundColor = "hsl(0, 0%, 14%)"
+        jogo_novo.style.display = "grid"
+        jogo_novo.style.border = "20px solid hsla(0, 0%, 31%, 0.649)"
+        jogo_novo.style.boxSizing = "content-box"
+
+
     }
 
     function enviarResposta() {
@@ -238,7 +287,7 @@
 
             botaoEnter.click();
 
-            function enviarResposta() { }
+            enviarResposta()
 
         }
     })
