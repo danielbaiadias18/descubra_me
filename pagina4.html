@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="JavaScript/pagina4.js"></script>
+    <!-- <script src="JavaScript/pagina4.js"></script> -->
     <style>
         body {
             background-color: rgba(94, 94, 94, 0.603) !important;
@@ -21,25 +21,19 @@
             align-items: center;
         }
 
-        #inicio1 {
+        #inicio {
             background-color: rgba(211, 211, 211, 0.507);
             width: 80vmin;
             height: 80vmin;
             border: 20px solid hsla(0, 0%, 31%, 0.649);
             box-sizing: content-box;
-            display: inline-flex;
+
+            display: grid;
+            grid-template-rows: repeat(15, auto);
+            grid-template-columns: repeat(15, auto);
         }
 
-        #inicio2 {
-            background-color: rgba(211, 211, 211, 0.507);
-            width: 80vmin;
-            height: 80vmin;
-            border: 20px solid hsla(0, 0%, 31%, 0.649);
-            box-sizing: content-box;
-            display: none;
-        }
-
-        #jogo1 {
+        #jogo {
             width: 80vmin;
             height: 80vmin;
 
@@ -81,6 +75,23 @@
             margin: 5px 0px 0px 0px;
         }
 
+        #dicaGuia {
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+
+            width: 150px;
+            height: 65px;
+            padding: 5px;
+            padding-top: 0;
+            font-size: 13px;
+            border: 3px solid rgba(255, 255, 255, 0.501);
+            border-bottom: none;
+            color: white;
+            background-color: rgba(9, 107, 255, 0.501);
+
+        }
+
         footer {
             color: rgb(45, 45, 45);
             position: absolute;
@@ -93,26 +104,14 @@
 
 <body id="body">
 
-    <div id="inicio1">
-        <div id="guiaInicio" onmouseover="carregaJogo()"></div>
-        <div>
-            <h1 id="seta">⇦</h1>
-            <h3 id="avisoMouse"> Inicie Aqui</h3>
-        </div>
-    </div>
+    <div id="inicio"></div>
 
-    <div id="inicio2">
-        <div id="guiaInicio2" onmouseover="carregaJogo2()"></div>
-        <div>
-            <h1 id="seta">⇦</h1>
-            <h3 id="avisoMouse"> Inicie Aqui</h3>
-        </div>
-    </div>
-
-    <div id="jogo1">
+    <div id="jogo">
 
     </div>
-
+    <div id="dicaGuia">
+        Para o jogo aparecer, basta passar o mouse no quadrado azul. =D
+    </div>
     <footer>
         4
     </footer>
@@ -120,3 +119,221 @@
 </body>
 
 </html>
+<script>
+    //---------------------------------------------------------------//
+    //==================--- INÍCIO JOGO NÍVEL 1 ---==================//
+    //---------------------------------------------------------------//
+    var fase = 1
+
+    var inicio = document.getElementById('inicio');
+    var jogo = document.getElementById("jogo");
+
+    function limpaGrid(idElemento) {
+        const grid = document.getElementById(idElemento);
+
+        while (grid.firstChild) {
+            grid.removeChild(grid.lastChild);
+        }
+    }
+
+    mostraInicio()
+
+    function adicionaPixelInicio(x, y) {
+        debugger
+        var pixel1 = document.createElement("div");
+        pixel1.style.gridColumnStart = x;
+        pixel1.style.gridRowStart = y;
+        pixel1.style.backgroundColor = "lightblue";
+        inicio.appendChild(pixel1);
+        pixel1.addEventListener("mouseover", function (e) {
+            debugger
+            if (fase == 1) {
+                fase++
+                carregaJogo()
+            }
+            if (fase == 2) {
+                fase++
+                carregaJogo2()
+            }
+            // if (fase == 3) {
+            //     carregaJogo3()
+            // } 
+            // if (fase == 4) {
+
+            // }
+            carregaJogo()
+            e.stopPropagation();
+        })
+    }
+
+    function mostraInicio() {
+        if (fase == 1) {
+            limpaGrid("inicio");
+            adicionaPixelInicio(1, 1);
+            adicionaPixelInicio(1, 2);
+            adicionaPixelInicio(2, 2);
+            adicionaPixelInicio(2, 1);
+        }
+        if (fase == 2) {
+            limpaGrid("inicio");
+            adicionaPixelInicio(15, 1);
+            adicionaPixelInicio(15, 2);
+            adicionaPixelInicio(14, 2);
+            adicionaPixelInicio(14, 1);
+        }
+    }
+
+    function mostraInicio2() {
+        debugger
+        inicio.style.display = "grid"
+        jogo.style.display = "none"
+
+
+    }
+
+    function carregaJogo() {
+        debugger
+        jogo.style.display = 'grid'
+        inicio.style.display = 'none'
+        jogo.classList.add("container_2")
+        adicionaPixel(1, 1, 'lightblue')
+        adicionaPixel(1, 2, 'lightblue')
+        adicionaPixel(2, 1, 'lightblue')
+        adicionaPixel(2, 2, 'lightblue')
+        adicionaPixel(1, 3)
+        adicionaPixel(1, 4)
+        adicionaPixel(1, 5)
+        adicionaPixel(1, 6)
+        adicionaPixel(1, 7)
+        adicionaPixel(2, 7)
+        adicionaPixel(3, 7)
+        adicionaPixel(4, 7)
+        adicionaPixel(5, 7)
+        adicionaPixel(6, 7)
+        adicionaPixel(6, 6)
+        adicionaPixel(6, 5)
+        adicionaPixel(6, 4)
+        adicionaPixel(6, 3)
+        adicionaPixel(6, 2)
+        adicionaPixel(7, 2)
+        adicionaPixel(8, 2)
+        adicionaPixel(8, 3)
+        adicionaPixel(8, 4)
+        adicionaPixel(8, 5)
+        adicionaPixel(8, 6)
+        adicionaPixel(8, 7)
+        adicionaPixel(8, 8)
+        adicionaPixel(8, 9)
+        adicionaPixel(8, 9)
+        adicionaPixel(7, 9)
+        adicionaPixel(6, 9)
+        adicionaPixel(5, 9)
+        adicionaPixel(5, 10)
+        adicionaPixel(5, 11)
+        adicionaPixel(5, 12)
+        adicionaPixel(5, 13)
+        adicionaPixel(6, 13)
+        adicionaPixel(7, 13)
+        adicionaPixel(8, 13)
+        adicionaPixel(9, 13)
+        adicionaPixel(10, 9)
+        adicionaPixel(11, 9)
+        adicionaPixel(12, 9)
+        adicionaPixel(13, 9)
+        adicionaPixel(10, 13)
+        adicionaPixel(10, 12)
+        adicionaPixel(10, 11)
+        adicionaPixel(10, 10)
+        adicionaPixel(13, 10)
+        adicionaPixel(13, 11)
+        adicionaPixel(13, 12)
+        adicionaPixel(13, 13)
+        adicionaPixel(13, 14)
+        adicionaPixel(14, 15, 'lightgreen')
+        adicionaPixel(14, 14, 'lightgreen')
+        adicionaPixel(15, 14, 'lightgreen')
+        adicionaPixel(15, 15, 'lightgreen')
+    }
+    var jogo = document.getElementById("jogo");
+
+    jogo.addEventListener("mouseover", function () {
+        console.log("jogo")
+        // document.location.reload();
+
+    })
+
+    function adicionaPixel(x, y, cor = "white") {
+        if (x >= 14 && y >= 14) {
+            var pxFinal = document.createElement("div");
+            pxFinal.style.gridColumnStart = x;
+            pxFinal.style.gridRowStart = y;
+            pxFinal.style.backgroundColor = cor;
+            console.log("verde")
+            pxFinal.addEventListener("mouseover", function (e) {
+                mostraInicio()
+                e.stopPropagation();
+            })
+            jogo.appendChild(pxFinal);
+
+        } else {
+            var pixel1 = document.createElement("div");
+            pixel1.style.gridColumnStart = x;
+            pixel1.style.gridRowStart = y;
+            pixel1.style.backgroundColor = cor;
+            jogo.appendChild(pixel1);
+            pixel1.addEventListener("mouseover", function (e) {
+                e.stopPropagation();
+            })
+
+        }
+    }
+
+    //----------------------------------------------------------------//
+    //===================--- FINAL JOGO NÍVEL 1 ---===================//
+    //----------------------------------------------------------------//
+
+    //---------------------------------------------------------------//
+    //==================--- INÍCIO JOGO NÍVEL 2 ---==================//
+    //---------------------------------------------------------------//
+
+    function carregaJogo2() {
+        debugger
+        jogo.style.display = 'grid';
+        inicio.style.display = 'none';
+        jogo.classList.add("container_2");
+
+        adicionaPixel(15, 1, "lightbulue");
+    }
+
+    //------------------------------------------------------------------//
+    //====================--- FINAL JOGO NÍVEL 2 ---====================//
+    //------------------------------------------------------------------//
+
+    function enviarResposta() {
+
+        var url = window.location.href;
+
+        var proximaUrl = url.split('/');
+
+        proximaUrl.pop();
+
+        proximaUrl = proximaUrl.join('/');
+
+        console.log("proximaUrl", proximaUrl)
+
+        window.location.href = proximaUrl + '/pagina5.html';
+    }
+
+    document.addEventListener('keypress', function (evento) {
+
+        if (evento.key === "Enter") {
+
+            const botaoEnter = document.querySelector('#botaoResposta');
+
+            botaoEnter.click();
+
+            enviarResposta()
+
+        }
+    })
+</script>
